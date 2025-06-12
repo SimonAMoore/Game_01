@@ -22,6 +22,7 @@ include "background.asm"
     jsr clear_screen
     jsr test_chars
     jsr test_sprites
+    jsr draw_car_a
     jsr background_draw_home
     jsr background_draw_grass
     jsr init_scanline_timer
