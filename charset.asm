@@ -310,7 +310,7 @@
     rts
 }
 
-.char_test_screen
+.test_chars
 {
     lda #&00 : ldx #&02 : ldy #&04 : jsr write_char_A_at_XY
     lda #&01 : ldx #&05 : ldy #&04 : jsr write_char_A_at_XY
