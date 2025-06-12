@@ -11,7 +11,10 @@
 
     6502 assembly language for the BBC Micro
 
-    This is a project for testing out 6845 special effects such as vertical rupture for horizontal scrolling on different lines by different amounts, and palette changes that occur at the exact end of a horizontal line just as the blanking period starts to avoid any visible glitches.
+    This is a project for testing out 6845 special effects such as:
+    
+      - Vertical rupture for horizontal scrolling on different lines by different amounts
+      - 6522 VIA Timing for palette changes that occur at the exact end of a horizontal line
   </p>
 </div>
 
