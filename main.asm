@@ -15,12 +15,12 @@ include "background.asm"
     ; Flush all buffers
     lda #&0F : ldx #&00 : jsr OSBYTE
 
-    ; Initialise display
+    ; Initialise
     jsr init_text_mode
     jsr instructions
     jsr init_graphics_mode
     jsr clear_screen
-    jsr char_test_screen
+    jsr test_chars
     jsr test_sprites
     jsr background_draw_home
     jsr background_draw_grass
@@ -28,7 +28,7 @@ include "background.asm"
     jsr init_keyboard
 
     ; Main loop
-.loop_1
+.main_loop
     ; Wait for Scanline_Timer
     lda #&40
 .wait_timer
@@ -42,6 +42,12 @@ include "background.asm"
     lda #&47 : sta VIDEO_ULA_PALETTE_REG
     lda #&57 : sta VIDEO_ULA_PALETTE_REG
 
+    ;Scanline timer triggered. Set colour 1 to magenta
+    lda #&22 : sta VIDEO_ULA_PALETTE_REG
+    lda #&32 : sta VIDEO_ULA_PALETTE_REG
+    lda #&62 : sta VIDEO_ULA_PALETTE_REG
+    lda #&72 : sta VIDEO_ULA_PALETTE_REG
+
     ;Scanline timer triggered. Set colour 2 to yellow
     lda #&84 : sta VIDEO_ULA_PALETTE_REG
     lda #&94 : sta VIDEO_ULA_PALETTE_REG
@@ -49,10 +55,10 @@ include "background.asm"
     lda #&d4 : sta VIDEO_ULA_PALETTE_REG
 
     ;Scanline timer triggered. Set colour 3 to green
-    lda #&A2 : sta VIDEO_ULA_PALETTE_REG
-    lda #&B2 : sta VIDEO_ULA_PALETTE_REG
-    lda #&E2 : sta VIDEO_ULA_PALETTE_REG
-    lda #&F2 : sta VIDEO_ULA_PALETTE_REG
+    lda #&A3 : sta VIDEO_ULA_PALETTE_REG
+    lda #&B3 : sta VIDEO_ULA_PALETTE_REG
+    lda #&E3 : sta VIDEO_ULA_PALETTE_REG
+    lda #&F3 : sta VIDEO_ULA_PALETTE_REG
 
     ; Wait for VSYNC
     lda #&02
@@ -66,6 +72,12 @@ include "background.asm"
     lda #&13 : sta VIDEO_ULA_PALETTE_REG
     lda #&43 : sta VIDEO_ULA_PALETTE_REG
     lda #&53 : sta VIDEO_ULA_PALETTE_REG
+
+    ;VSYNC triggered. Set colour 1 to green
+    lda #&25 : sta VIDEO_ULA_PALETTE_REG
+    lda #&35 : sta VIDEO_ULA_PALETTE_REG
+    lda #&65 : sta VIDEO_ULA_PALETTE_REG
+    lda #&75 : sta VIDEO_ULA_PALETTE_REG
 
     ;VSYNC triggered. Set colour 2 to red
     lda #&86 : sta VIDEO_ULA_PALETTE_REG
@@ -107,7 +119,7 @@ include "background.asm"
     lda #&53 : sta VIDEO_ULA_PALETTE_REG
 
     ; Return to start of main loop
-    jmp loop_1
+    jmp main_loop
 
 .exit
     rts
