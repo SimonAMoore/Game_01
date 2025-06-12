@@ -19,12 +19,15 @@
       - 6522 VIA Timing for palette changes that occur at the exact end of a horizontal line
   </p>
 </div>
-<div>
+<div align="center">
   <a href="https://github.com/simonamoore/game_01">
     <img src="images/screenshot_01.png" alt="design" width="640" height="480">
   </a>
   <a href="https://github.com/simonamoore/game_01">
     <img src="images/screenshot_02.png" alt="design" width="640" height="480">
+  </a>
+  <a href="https://github.com/simonamoore/game_01">
+    <img src="images/screenshot_03.png" alt="design" width="640" height="480">
   </a>
 </div>
 <br><hr><br>
