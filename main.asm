@@ -27,7 +27,7 @@ include "background.asm"
     jsr init_keyboard
 
     ; Main loop
-.loop
+.loop_1
     ; Wait for Scanline_Timer
     lda #&40
 .wait_timer
@@ -82,7 +82,29 @@ include "background.asm"
     jsr read_keys
     jsr test_keys
 
-    jmp loop
+    lda #&07 : sta VIDEO_ULA_PALETTE_REG
+    lda #&17 : sta VIDEO_ULA_PALETTE_REG
+    lda #&47 : sta VIDEO_ULA_PALETTE_REG
+    lda #&57 : sta VIDEO_ULA_PALETTE_REG
+
+    ldx #&ff
+.loop_2
+    nop : nop : nop : nop
+    nop : nop : nop : nop
+    nop : nop : nop : nop
+    nop : nop
+
+    dex
+    bne loop_2
+
+    nop : nop : nop
+    lda #&03 : sta VIDEO_ULA_PALETTE_REG
+    lda #&13 : sta VIDEO_ULA_PALETTE_REG
+    lda #&43 : sta VIDEO_ULA_PALETTE_REG
+    lda #&53 : sta VIDEO_ULA_PALETTE_REG
+
+    ; Return to start of main loop
+    jmp loop_1
 
 .exit
     rts
