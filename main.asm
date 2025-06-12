@@ -82,6 +82,8 @@ include "background.asm"
     jsr read_keys
     jsr test_keys
 
+    ; Change background to black and wait for line 1 of raster to reach end of line 8
+    ; then change background to blue
     lda #&07 : sta VIDEO_ULA_PALETTE_REG
     lda #&17 : sta VIDEO_ULA_PALETTE_REG
     lda #&47 : sta VIDEO_ULA_PALETTE_REG
