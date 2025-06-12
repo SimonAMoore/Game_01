@@ -16,18 +16,18 @@
     equb    SCR_LO      ; R13 - Screen Address DIV 8 LSB
 
 .palette_data
-    equb    &07         ; %0000, 0.0 = 7 (Black = 0 EOR 7)
-    equb    &17         ; %0001, 0.1 = 7
-    equb    &47         ; %0100, 0.2 = 7
-    equb    &57         ; %0101, 0.3 = 7
+    equb    &03         ; %0000, 0.0 = 3 (Blue = 4 EOR 7)
+    equb    &13         ; %0001, 0.1 = 3
+    equb    &43         ; %0100, 0.2 = 3
+    equb    &53         ; %0101, 0.3 = 3
     equb    &25         ; %0010, 1.0 = 5 (Green = 2 EOR 7)
     equb    &35         ; %0011, 1.1 = 5
     equb    &65         ; %0110, 1.2 = 5
     equb    &75         ; %0111, 1.3 = 5
-    equb    &84         ; %1000, 2.0 = 4 (Yellow = 3 EOR 7)
-    equb    &94         ; %1001, 2.1 = 4
-    equb    &C4         ; %1100, 2.2 = 4
-    equb    &D4         ; %1101, 2.3 = 4
+    equb    &86         ; %1000, 2.0 = 6 (Red = 1 EOR 7)
+    equb    &96         ; %1001, 2.1 = 6
+    equb    &C6         ; %1100, 2.2 = 6
+    equb    &D6         ; %1101, 2.3 = 6
     equb    &A2         ; %1010, 3.0 = 2 (Magenta = 5 EOR 7)
     equb    &B2         ; %1011, 3.1 = 2
     equb    &E2         ; %1110, 3.2 = 2

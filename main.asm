@@ -8,6 +8,7 @@ GUARD   &5000
 
 include "charset.asm"
 include "sprites.asm"
+include "background.asm"
 
 .main_entry:
 {
@@ -19,10 +20,11 @@ include "sprites.asm"
     jsr instructions
     jsr init_graphics_mode
     jsr clear_screen
-    jsr init_scanline_timer
-    jsr init_keyboard
     jsr char_test_screen
     jsr test_sprites
+    jsr background_draw_home
+    jsr init_scanline_timer
+    jsr init_keyboard
 
     ; Main loop
 .loop
@@ -33,13 +35,19 @@ include "sprites.asm"
     beq wait_timer
     sta SYS_VIA_R13_IFR
 
-    ;Scanline timer triggered. Set colour 0 to blue
-    lda #&03 : sta VIDEO_ULA_PALETTE_REG
-    lda #&13 : sta VIDEO_ULA_PALETTE_REG
-    lda #&43 : sta VIDEO_ULA_PALETTE_REG
-    lda #&53 : sta VIDEO_ULA_PALETTE_REG
+    ;Scanline timer triggered. Set colour 0 to black
+    lda #&07 : sta VIDEO_ULA_PALETTE_REG
+    lda #&17 : sta VIDEO_ULA_PALETTE_REG
+    lda #&47 : sta VIDEO_ULA_PALETTE_REG
+    lda #&57 : sta VIDEO_ULA_PALETTE_REG
 
-    ;Scanline timer triggered. Set colour 3 to magenta
+    ;Scanline timer triggered. Set colour 2 to yellow
+    lda #&84 : sta VIDEO_ULA_PALETTE_REG
+    lda #&94 : sta VIDEO_ULA_PALETTE_REG
+    lda #&c4 : sta VIDEO_ULA_PALETTE_REG
+    lda #&d4 : sta VIDEO_ULA_PALETTE_REG
+
+    ;Scanline timer triggered. Set colour 3 to green
     lda #&A2 : sta VIDEO_ULA_PALETTE_REG
     lda #&B2 : sta VIDEO_ULA_PALETTE_REG
     lda #&E2 : sta VIDEO_ULA_PALETTE_REG
@@ -52,11 +60,17 @@ include "sprites.asm"
     beq wait_vsync
     sta SYS_VIA_R13_IFR
 
-    ;VSYNC triggered. Set colour 0 to black
-    lda #&07 : sta VIDEO_ULA_PALETTE_REG
-    lda #&17 : sta VIDEO_ULA_PALETTE_REG
-    lda #&47 : sta VIDEO_ULA_PALETTE_REG
-    lda #&57 : sta VIDEO_ULA_PALETTE_REG
+    ;VSYNC triggered. Set colour 0 to blue
+    lda #&03 : sta VIDEO_ULA_PALETTE_REG
+    lda #&13 : sta VIDEO_ULA_PALETTE_REG
+    lda #&43 : sta VIDEO_ULA_PALETTE_REG
+    lda #&53 : sta VIDEO_ULA_PALETTE_REG
+
+    ;VSYNC triggered. Set colour 2 to red
+    lda #&86 : sta VIDEO_ULA_PALETTE_REG
+    lda #&96 : sta VIDEO_ULA_PALETTE_REG
+    lda #&c6 : sta VIDEO_ULA_PALETTE_REG
+    lda #&d6 : sta VIDEO_ULA_PALETTE_REG
 
     ;VSYNC triggered. Set colour 3 to white
     lda #&A0 : sta VIDEO_ULA_PALETTE_REG
