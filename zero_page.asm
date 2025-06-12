@@ -6,9 +6,12 @@ GUARD &9F
 .TEMP_1_HI        skip 1
 .TEMP_2_LO        skip 1
 .TEMP_2_HI        skip 1
+.TEMP_3_LO        skip 1
+.TEMP_3_HI        skip 1
 
 TEMP_1 = TEMP_1_LO
 TEMP_2 = TEMP_2_LO
+TEMP_3 = TEMP_3_LO
 
 .TEMP_ADDR_1_LO   skip 1
 .TEMP_ADDR_1_HI   skip 1

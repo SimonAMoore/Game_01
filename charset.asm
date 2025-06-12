@@ -312,49 +312,49 @@
 
 .char_test_screen
 {
-    lda #&00 : ldx #&02 : ldy #&05 : jsr write_char_A_at_XY
-    lda #&01 : ldx #&05 : ldy #&05 : jsr write_char_A_at_XY
-    lda #&02 : ldx #&08 : ldy #&05 : jsr write_char_A_at_XY
-    lda #&03 : ldx #&0b : ldy #&05 : jsr write_char_A_at_XY
-    lda #&04 : ldx #&0e : ldy #&05 : jsr write_char_A_at_XY
-    lda #&05 : ldx #&11 : ldy #&05 : jsr write_char_A_at_XY
-    lda #&06 : ldx #&14 : ldy #&05 : jsr write_char_A_at_XY
-    lda #&07 : ldx #&17 : ldy #&05 : jsr write_char_A_at_XY
-    lda #&08 : ldx #&1a : ldy #&05 : jsr write_char_A_at_XY
-    lda #&09 : ldx #&1d : ldy #&05 : jsr write_char_A_at_XY
+    lda #&00 : ldx #&02 : ldy #&04 : jsr write_char_A_at_XY
+    lda #&01 : ldx #&05 : ldy #&04 : jsr write_char_A_at_XY
+    lda #&02 : ldx #&08 : ldy #&04 : jsr write_char_A_at_XY
+    lda #&03 : ldx #&0b : ldy #&04 : jsr write_char_A_at_XY
+    lda #&04 : ldx #&0e : ldy #&04 : jsr write_char_A_at_XY
+    lda #&05 : ldx #&11 : ldy #&04 : jsr write_char_A_at_XY
+    lda #&06 : ldx #&14 : ldy #&04 : jsr write_char_A_at_XY
+    lda #&07 : ldx #&17 : ldy #&04 : jsr write_char_A_at_XY
+    lda #&08 : ldx #&1a : ldy #&04 : jsr write_char_A_at_XY
+    lda #&09 : ldx #&1d : ldy #&04 : jsr write_char_A_at_XY
 
-    lda #&0a : ldx #&02 : ldy #&07 : jsr write_char_A_at_XY
-    lda #&0b : ldx #&05 : ldy #&07 : jsr write_char_A_at_XY
-    lda #&0c : ldx #&08 : ldy #&07 : jsr write_char_A_at_XY
-    lda #&0d : ldx #&0b : ldy #&07 : jsr write_char_A_at_XY
-    lda #&0e : ldx #&0e : ldy #&07 : jsr write_char_A_at_XY
-    lda #&0f : ldx #&11 : ldy #&07 : jsr write_char_A_at_XY
-    lda #&10 : ldx #&14 : ldy #&07 : jsr write_char_A_at_XY
-    lda #&11 : ldx #&17 : ldy #&07 : jsr write_char_A_at_XY
-    lda #&12 : ldx #&1a : ldy #&07 : jsr write_char_A_at_XY
-    lda #&13 : ldx #&1d : ldy #&07 : jsr write_char_A_at_XY
+    lda #&0a : ldx #&02 : ldy #&06 : jsr write_char_A_at_XY
+    lda #&0b : ldx #&05 : ldy #&06 : jsr write_char_A_at_XY
+    lda #&0c : ldx #&08 : ldy #&06 : jsr write_char_A_at_XY
+    lda #&0d : ldx #&0b : ldy #&06 : jsr write_char_A_at_XY
+    lda #&0e : ldx #&0e : ldy #&06 : jsr write_char_A_at_XY
+    lda #&0f : ldx #&11 : ldy #&06 : jsr write_char_A_at_XY
+    lda #&10 : ldx #&14 : ldy #&06 : jsr write_char_A_at_XY
+    lda #&11 : ldx #&17 : ldy #&06 : jsr write_char_A_at_XY
+    lda #&12 : ldx #&1a : ldy #&06 : jsr write_char_A_at_XY
+    lda #&13 : ldx #&1d : ldy #&06 : jsr write_char_A_at_XY
 
-    lda #&14 : ldx #&02 : ldy #&09 : jsr write_char_A_at_XY
-    lda #&15 : ldx #&05 : ldy #&09 : jsr write_char_A_at_XY
-    lda #&16 : ldx #&08 : ldy #&09 : jsr write_char_A_at_XY
-    lda #&17 : ldx #&0b : ldy #&09 : jsr write_char_A_at_XY
-    lda #&18 : ldx #&0e : ldy #&09 : jsr write_char_A_at_XY
-    lda #&19 : ldx #&11 : ldy #&09 : jsr write_char_A_at_XY
-    lda #&1A : ldx #&14 : ldy #&09 : jsr write_char_A_at_XY
-    lda #&1B : ldx #&17 : ldy #&09 : jsr write_char_A_at_XY
-    lda #&1C : ldx #&1a : ldy #&09 : jsr write_char_A_at_XY
-    lda #&1D : ldx #&1d : ldy #&09 : jsr write_char_A_at_XY
+    lda #&14 : ldx #&02 : ldy #&08 : jsr write_char_A_at_XY
+    lda #&15 : ldx #&05 : ldy #&08 : jsr write_char_A_at_XY
+    lda #&16 : ldx #&08 : ldy #&08 : jsr write_char_A_at_XY
+    lda #&17 : ldx #&0b : ldy #&08 : jsr write_char_A_at_XY
+    lda #&18 : ldx #&0e : ldy #&08 : jsr write_char_A_at_XY
+    lda #&19 : ldx #&11 : ldy #&08 : jsr write_char_A_at_XY
+    lda #&1A : ldx #&14 : ldy #&08 : jsr write_char_A_at_XY
+    lda #&1B : ldx #&17 : ldy #&08 : jsr write_char_A_at_XY
+    lda #&1C : ldx #&1a : ldy #&08 : jsr write_char_A_at_XY
+    lda #&1D : ldx #&1d : ldy #&08 : jsr write_char_A_at_XY
 
-    lda #&1E : ldx #&02 : ldy #&0b : jsr write_char_A_at_XY
-    lda #&1F : ldx #&05 : ldy #&0b : jsr write_char_A_at_XY
-    lda #&20 : ldx #&08 : ldy #&0b : jsr write_char_A_at_XY
-    lda #&21 : ldx #&0b : ldy #&0b : jsr write_char_A_at_XY
-    lda #&22 : ldx #&0e : ldy #&0b : jsr write_char_A_at_XY
-    lda #&23 : ldx #&11 : ldy #&0b : jsr write_char_A_at_XY
-    lda #&24 : ldx #&14 : ldy #&0b : jsr write_char_A_at_XY
-    lda #&25 : ldx #&17 : ldy #&0b : jsr write_char_A_at_XY
-    lda #&26 : ldx #&1a : ldy #&0b : jsr write_char_A_at_XY
-    lda #&27 : ldx #&1d : ldy #&0b : jsr write_char_A_at_XY
+    lda #&1E : ldx #&02 : ldy #&0a : jsr write_char_A_at_XY
+    lda #&1F : ldx #&05 : ldy #&0a : jsr write_char_A_at_XY
+    lda #&20 : ldx #&08 : ldy #&0a : jsr write_char_A_at_XY
+    lda #&21 : ldx #&0b : ldy #&0a : jsr write_char_A_at_XY
+    lda #&22 : ldx #&0e : ldy #&0a : jsr write_char_A_at_XY
+    lda #&23 : ldx #&11 : ldy #&0a : jsr write_char_A_at_XY
+    lda #&24 : ldx #&14 : ldy #&0a : jsr write_char_A_at_XY
+    lda #&25 : ldx #&17 : ldy #&0a : jsr write_char_A_at_XY
+    lda #&26 : ldx #&1a : ldy #&0a : jsr write_char_A_at_XY
+    lda #&27 : ldx #&1d : ldy #&0a : jsr write_char_A_at_XY
 
 .exit
     rts

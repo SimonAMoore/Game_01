@@ -23,6 +23,7 @@ include "background.asm"
     jsr char_test_screen
     jsr test_sprites
     jsr background_draw_home
+    jsr background_draw_grass
     jsr init_scanline_timer
     jsr init_keyboard
 
