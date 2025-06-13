@@ -104,5 +104,8 @@
 {
     lda #&71 : sta TEMP_ADDR_1_HI
     lda #&00 : sta TEMP_ADDR_1_LO
+    jsr test_sprites_16
+    lda #&73 : sta TEMP_ADDR_1_HI
+    lda #&08 : sta TEMP_ADDR_1_LO
     jmp test_sprites_16
 }
