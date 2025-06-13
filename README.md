@@ -31,6 +31,8 @@
   </a>
   <a href="https://github.com/simonamoore/game_01">
     <img src="images/screenshot_04.png" alt="design" width="640" height="480">
+  <a href="https://github.com/simonamoore/game_01">
+    <img src="images/screenshot_05.png" alt="design" width="640" height="480">
   </a>
 
 <br><hr><br>
