@@ -40,14 +40,14 @@
 
 .loop_1
     lda sprites + 0, y
-    sta &7000, y
+    sta &5000, y
     lda sprites + 8, y
-    sta &7008, y
+    sta &5008, y
     
     lda sprites + 16, y
-    sta &7020, y
+    sta &5020, y
     lda sprites + 24, y
-    sta &7028, y
+    sta &5028, y
 
     dey
     bmi skip_1
@@ -102,10 +102,10 @@
 
 .draw_car_a
 {
-    lda #&71 : sta TEMP_ADDR_1_HI
+    lda #&6d : sta TEMP_ADDR_1_HI
     lda #&00 : sta TEMP_ADDR_1_LO
     jsr test_sprites_16
-    lda #&73 : sta TEMP_ADDR_1_HI
-    lda #&08 : sta TEMP_ADDR_1_LO
+    lda #&74 : sta TEMP_ADDR_1_HI
+    lda #&40 : sta TEMP_ADDR_1_LO
     jmp test_sprites_16
 }

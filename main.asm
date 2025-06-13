@@ -61,6 +61,62 @@ include "background.asm"
     lda #&E3 : sta VIDEO_ULA_PALETTE_REG
     lda #&F3 : sta VIDEO_ULA_PALETTE_REG
 
+    ; Wait for end of river-bank scanline and then change
+    ; palette for white/green car_a sprite
+    ldx #&d8
+.loop_3
+    nop : nop
+    dex
+    bne loop_3
+    ; Change colour 0
+    ;lda #&07 : sta VIDEO_ULA_PALETTE_REG
+    ;lda #&17 : sta VIDEO_ULA_PALETTE_REG
+    ;lda #&47 : sta VIDEO_ULA_PALETTE_REG
+    ;lda #&57 : sta VIDEO_ULA_PALETTE_REG
+    ; Change colour 1
+    lda #&26 : sta VIDEO_ULA_PALETTE_REG
+    lda #&36 : sta VIDEO_ULA_PALETTE_REG
+    lda #&66 : sta VIDEO_ULA_PALETTE_REG
+    lda #&76 : sta VIDEO_ULA_PALETTE_REG
+    ; Change colour 2
+    lda #&85 : sta VIDEO_ULA_PALETTE_REG
+    lda #&95 : sta VIDEO_ULA_PALETTE_REG
+    lda #&c5 : sta VIDEO_ULA_PALETTE_REG
+    lda #&d5 : sta VIDEO_ULA_PALETTE_REG
+    ; Change colour 3
+    lda #&A0 : sta VIDEO_ULA_PALETTE_REG
+    lda #&B0 : sta VIDEO_ULA_PALETTE_REG
+    lda #&E0 : sta VIDEO_ULA_PALETTE_REG
+    lda #&F0 : sta VIDEO_ULA_PALETTE_REG
+
+    ; Wait for end of 4th (Top) road lane scanline and then change
+    ; palette for purple/blue/yellow car_a sprite
+    ldx #&d2
+.loop_4
+    nop : nop
+    dex
+    bne loop_4
+    ; Change colour 0
+    ;lda #&07 : sta VIDEO_ULA_PALETTE_REG
+    ;lda #&17 : sta VIDEO_ULA_PALETTE_REG
+    ;lda #&47 : sta VIDEO_ULA_PALETTE_REG
+    ;lda #&57 : sta VIDEO_ULA_PALETTE_REG
+    ; Change colour 1
+    lda #&22 : sta VIDEO_ULA_PALETTE_REG
+    lda #&32 : sta VIDEO_ULA_PALETTE_REG
+    lda #&62 : sta VIDEO_ULA_PALETTE_REG
+    lda #&72 : sta VIDEO_ULA_PALETTE_REG
+    ; Change colour 2
+    lda #&84 : sta VIDEO_ULA_PALETTE_REG
+    lda #&94 : sta VIDEO_ULA_PALETTE_REG
+    lda #&c4 : sta VIDEO_ULA_PALETTE_REG
+    lda #&d4 : sta VIDEO_ULA_PALETTE_REG
+    ; Change colour 3
+    lda #&A3 : sta VIDEO_ULA_PALETTE_REG
+    lda #&B3 : sta VIDEO_ULA_PALETTE_REG
+    lda #&E3 : sta VIDEO_ULA_PALETTE_REG
+    lda #&F3 : sta VIDEO_ULA_PALETTE_REG
+
     ; Wait for VSYNC
     lda #&02
 .wait_vsync
@@ -69,10 +125,10 @@ include "background.asm"
     sta SYS_VIA_R13_IFR
 
     ;VSYNC triggered. Set colour 0 to blue
-    lda #&03 : sta VIDEO_ULA_PALETTE_REG
-    lda #&13 : sta VIDEO_ULA_PALETTE_REG
-    lda #&43 : sta VIDEO_ULA_PALETTE_REG
-    lda #&53 : sta VIDEO_ULA_PALETTE_REG
+    ;lda #&03 : sta VIDEO_ULA_PALETTE_REG
+    ;lda #&13 : sta VIDEO_ULA_PALETTE_REG
+    ;lda #&43 : sta VIDEO_ULA_PALETTE_REG
+    ;lda #&53 : sta VIDEO_ULA_PALETTE_REG
 
     ;VSYNC triggered. Set colour 1 to green
     lda #&25 : sta VIDEO_ULA_PALETTE_REG
@@ -80,11 +136,11 @@ include "background.asm"
     lda #&65 : sta VIDEO_ULA_PALETTE_REG
     lda #&75 : sta VIDEO_ULA_PALETTE_REG
 
-    ;VSYNC triggered. Set colour 2 to red
-    lda #&86 : sta VIDEO_ULA_PALETTE_REG
-    lda #&96 : sta VIDEO_ULA_PALETTE_REG
-    lda #&c6 : sta VIDEO_ULA_PALETTE_REG
-    lda #&d6 : sta VIDEO_ULA_PALETTE_REG
+    ;VSYNC triggered. Set colour 2 to yellow
+    ;lda #&84 : sta VIDEO_ULA_PALETTE_REG
+    ;lda #&94 : sta VIDEO_ULA_PALETTE_REG
+    ;lda #&c4 : sta VIDEO_ULA_PALETTE_REG
+    ;lda #&d4 : sta VIDEO_ULA_PALETTE_REG
 
     ;VSYNC triggered. Set colour 3 to white
     lda #&A0 : sta VIDEO_ULA_PALETTE_REG
@@ -96,24 +152,18 @@ include "background.asm"
     jsr read_keys
     jsr test_keys
 
-    ; Change background to black and wait for line 1 of raster to reach end of line 8
+    ; Wait for character line 1 end of scanline
     ; then change background to blue
-    lda #&07 : sta VIDEO_ULA_PALETTE_REG
-    lda #&17 : sta VIDEO_ULA_PALETTE_REG
-    lda #&47 : sta VIDEO_ULA_PALETTE_REG
-    lda #&57 : sta VIDEO_ULA_PALETTE_REG
-
-    ldx #&ff
+    ldx #&f2
 .loop_2
     nop : nop : nop : nop
     nop : nop : nop : nop
     nop : nop : nop : nop
-    nop : nop
-
+    nop : nop : nop
     dex
     bne loop_2
-
     nop : nop : nop
+    ; Change colour 0 to blue
     lda #&03 : sta VIDEO_ULA_PALETTE_REG
     lda #&13 : sta VIDEO_ULA_PALETTE_REG
     lda #&43 : sta VIDEO_ULA_PALETTE_REG
