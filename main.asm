@@ -68,11 +68,6 @@ include "background.asm"
     nop : nop
     dex
     bne loop_3
-    ; Change colour 0
-    ;lda #&07 : sta VIDEO_ULA_PALETTE_REG
-    ;lda #&17 : sta VIDEO_ULA_PALETTE_REG
-    ;lda #&47 : sta VIDEO_ULA_PALETTE_REG
-    ;lda #&57 : sta VIDEO_ULA_PALETTE_REG
     ; Change colour 1
     lda #&26 : sta VIDEO_ULA_PALETTE_REG
     lda #&36 : sta VIDEO_ULA_PALETTE_REG
@@ -96,11 +91,6 @@ include "background.asm"
     nop : nop
     dex
     bne loop_4
-    ; Change colour 0
-    ;lda #&07 : sta VIDEO_ULA_PALETTE_REG
-    ;lda #&17 : sta VIDEO_ULA_PALETTE_REG
-    ;lda #&47 : sta VIDEO_ULA_PALETTE_REG
-    ;lda #&57 : sta VIDEO_ULA_PALETTE_REG
     ; Change colour 1
     lda #&22 : sta VIDEO_ULA_PALETTE_REG
     lda #&32 : sta VIDEO_ULA_PALETTE_REG
@@ -124,23 +114,11 @@ include "background.asm"
     beq wait_vsync
     sta SYS_VIA_R13_IFR
 
-    ;VSYNC triggered. Set colour 0 to blue
-    ;lda #&03 : sta VIDEO_ULA_PALETTE_REG
-    ;lda #&13 : sta VIDEO_ULA_PALETTE_REG
-    ;lda #&43 : sta VIDEO_ULA_PALETTE_REG
-    ;lda #&53 : sta VIDEO_ULA_PALETTE_REG
-
     ;VSYNC triggered. Set colour 1 to green
     lda #&25 : sta VIDEO_ULA_PALETTE_REG
     lda #&35 : sta VIDEO_ULA_PALETTE_REG
     lda #&65 : sta VIDEO_ULA_PALETTE_REG
     lda #&75 : sta VIDEO_ULA_PALETTE_REG
-
-    ;VSYNC triggered. Set colour 2 to yellow
-    ;lda #&84 : sta VIDEO_ULA_PALETTE_REG
-    ;lda #&94 : sta VIDEO_ULA_PALETTE_REG
-    ;lda #&c4 : sta VIDEO_ULA_PALETTE_REG
-    ;lda #&d4 : sta VIDEO_ULA_PALETTE_REG
 
     ;VSYNC triggered. Set colour 3 to white
     lda #&A0 : sta VIDEO_ULA_PALETTE_REG
@@ -156,10 +134,8 @@ include "background.asm"
     ; then change background to blue
     ldx #&f2
 .loop_2
-    nop : nop : nop : nop
-    nop : nop : nop : nop
-    nop : nop : nop : nop
-    nop : nop : nop
+    nop : nop : nop : nop : nop : nop : nop : nop
+    nop : nop : nop : nop : nop : nop : nop
     dex
     bne loop_2
     nop : nop : nop
