@@ -55,3 +55,42 @@ SCREEN_ADDR = &5000
 SCR_LO = LO(SCREEN_ADDR DIV 8)
 SCR_HI = HI(SCREEN_ADDR DIV 8)
 
+GRAPHICS_MODE = 1
+
+IF GRAPHICS_MODE = 1
+    MACRO ULA_SET_PALETTE logical, actual
+        IF logical = 0
+            lda #&00 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+            lda #&10 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+            lda #&40 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+            lda #&50 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+        ENDIF
+        IF logical = 1
+            lda #&20 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+            lda #&30 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+            lda #&60 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+            lda #&70 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+        ENDIF
+        IF logical = 2
+            lda #&80 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+            lda #&90 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+            lda #&C0 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+            lda #&D0 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+        ENDIF
+        IF logical = 3
+            lda #&A0 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+            lda #&B0 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+            lda #&E0 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+            lda #&F0 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+        ENDIF
+ENDMACRO
+ENDIF
+
+COL_BLACK   = 0
+COL_RED     = 1
+COL_GREEN   = 2
+COL_YELLOW  = 3
+COL_BLUE    = 4
+COL_MAGENTA = 5
+COL_CYAN    = 6
+COL_WHITE   = 7
