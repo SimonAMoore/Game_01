@@ -154,6 +154,7 @@ include "background.asm"
 
 include "instructions.asm"
 include "graphics.asm"
+include "rupture_scroll.asm"
 include "interrupts.asm"
 include "keyboard.asm"
 
