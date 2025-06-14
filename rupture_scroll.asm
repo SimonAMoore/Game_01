@@ -7,9 +7,32 @@
 ;
 .rupture_R0
 {
-    ; Set number of character lines
     ; Set screen address
+    lda #&0c
+    sta CRTC_REG
+    lda #&0a
+    sta CRTC_DATA
+    lda #&0d
+    sta CRTC_REG
+    lda #&00
+    sta CRTC_DATA
+
     ; Set vsync position to off screen
+    lda #&07
+    sta CRTC_REG
+    lda #&0c
+    sta CRTC_DATA
+
+    ; Set number of character lines
+    lda #&04
+    sta CRTC_REG
+    lda #&0b
+    sta CRTC_DATA
+
+    lda #&06
+    sta CRTC_REG
+    lda #&0c
+    sta CRTC_DATA
 
 .exit
     rts
@@ -29,10 +52,34 @@
 ;
 .rupture_R1
 {
-    ; Set number of character lines
     ; Set screen address
+    lda #&0c
+    sta CRTC_REG
+    lda #&0a
+    sta CRTC_DATA
+
+    lda #&0d
+    sta CRTC_REG
+    lda #&00
+    sta CRTC_DATA
+
     ; Set vsync position
-        
+    lda #&07
+    sta CRTC_REG
+    lda #&7f
+    sta CRTC_DATA
+       
+    ; Set number of character lines
+    lda #&04
+    sta CRTC_REG
+    lda #&1b
+    sta CRTC_DATA
+
+    lda #&06
+    sta CRTC_REG
+    lda #&0c
+    sta CRTC_DATA
+
 .exit
     rts
 }
