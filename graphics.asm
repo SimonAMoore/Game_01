@@ -120,3 +120,24 @@
 .exit
     rts
 }
+
+.test_screen
+{
+    lda #22 : jsr OSWRCH
+    lda #1 : jsr OSWRCH
+
+    lda #&30
+    ldx #24
+.loop_2
+    ldy #&20
+.loop_1
+    jsr OSWRCH
+    dey
+    bne loop_1
+    adc #&01
+    dex
+    bne loop_2
+
+.exit
+    rts
+}
