@@ -124,7 +124,7 @@ print "                   .init_scanline_timer: ", ~init_scanline_timer
 print "                         .init_keyboard: ", ~init_keyboard
 print "                          .rupture_init: ", ~rupture_init
 print "=============================================="
-print "     T1 Timer Setup Time:   ", LEFT$("$000", 5 - LEN(STR$~(SYS_VIA_T1_SET_TIME))), STR$~(SYS_VIA_T1_SET_TIME), " microseconds ( ", SYS_VIA_T1_SET_TIME, ")"
-print "     T1 Timer Latch Time:   ", LEFT$("$000", 5 - LEN(STR$~(SYS_VIA_T1_LATCH_TIME))), STR$~(SYS_VIA_T1_LATCH_TIME), " microseconds ( ", SYS_VIA_T1_LATCH_TIME, ")"
+print "     T1 Timer Setup Time:   ", LEFT$("$0000", 5 - LEN(STR$~(SYS_VIA_T1_SET_TIME))), STR$~(SYS_VIA_T1_SET_TIME), " microseconds ( ", SYS_VIA_T1_SET_TIME, ")"
+print "     T1 Timer Latch Time:   ", LEFT$("$0000", 5 - LEN(STR$~(SYS_VIA_T1_LATCH_TIME))), STR$~(SYS_VIA_T1_LATCH_TIME), " microseconds ( ", SYS_VIA_T1_LATCH_TIME, ")"
 print "    Display Refresh Rate: ", DISPLAY_REFRESH, "Hz"
 print "=============================================="
