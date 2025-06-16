@@ -41,16 +41,11 @@
     bne loop
 .skip
 
-    Adjust = 8                                 ; Adjustment for timer to trigger just before horizontal blanking
-    H_Refresh = 64                             ; Horizontal refresh period in microseconds
-    V_Refresh = 20000 - 32 - 2                 ; Vertical refresh period in microseconds (-2us T1 load, -32us half scanline)
-    Scanline = (8 + 12) * 8 - 3                 ; Calculate scanline to trigger timer on
-    Setup_Time = Scanline * H_Refresh + Adjust ; Initial time needed for timer to sync with vertical refresh
-
-    lda #LO(Setup_Time) : sta SYS_VIA_R4_T1C_L
-    lda #HI(Setup_Time) : sta SYS_VIA_R5_T1C_H
-    lda #LO(V_Refresh) : sta SYS_VIA_R6_T1L_L
-    lda #HI(V_Refresh) : sta SYS_VIA_R7_T1L_H
+    ; T1 Timer values set in bbc.asm
+    lda #LO(SYS_VIA_T1_SET_TIME) : sta SYS_VIA_R4_T1C_L
+    lda #HI(SYS_VIA_T1_SET_TIME) : sta SYS_VIA_R5_T1C_H
+    lda #LO(SYS_VIA_T1_LATCH_TIME) : sta SYS_VIA_R6_T1L_L
+    lda #HI(SYS_VIA_T1_LATCH_TIME) : sta SYS_VIA_R7_T1L_H
 
 .exit
     rts
