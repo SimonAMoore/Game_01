@@ -49,8 +49,8 @@
 
     lda #LO(Setup_Time) : sta SYS_VIA_R4_T1C_L
     lda #HI(Setup_Time) : sta SYS_VIA_R5_T1C_H
-    lda #LO(V_Refresh/2-1) : sta SYS_VIA_R6_T1L_L
-    lda #HI(V_Refresh/2-1) : sta SYS_VIA_R7_T1L_H
+    lda #LO(64*16-2) : sta SYS_VIA_R6_T1L_L
+    lda #HI(64*16-2) : sta SYS_VIA_R7_T1L_H
 
 .exit
     rts
