@@ -25,33 +25,34 @@ include "background.asm"
     lda #&0F : ldx #&00 : jsr OSBYTE
 
     ; Initialise
-    jsr init_text_mode
-    jsr instructions
-    jsr clear_screen
+    ;jsr init_text_mode
+    ;jsr instructions
+    ;jsr clear_screen
+    jsr test_screen
     jsr init_graphics_mode
-    jsr test_chars
-    jsr test_sprites
-    jsr draw_car_a
-    jsr background_draw_home
-    jsr background_draw_grass
+    ;jsr test_chars
+    ;jsr test_sprites
+    ;jsr draw_car_a
+    ;jsr background_draw_home
+    ;jsr background_draw_grass
     jsr init_scanline_timer
-    jsr init_keyboard
+    ;jsr init_keyboard
     ;jsr rupture_init
 
     ; Main loop
 .main_loop
     ; Wait for Scanline_Timer
-    {
-        lda #&40
-    .wait
-        bit SYS_VIA_R13_IFR
-        beq wait
-        sta SYS_VIA_R13_IFR
-    }
+    ;{
+    ;    lda #&40
+    ;.wait
+    ;    bit SYS_VIA_R13_IFR
+    ;    beq wait
+    ;    sta SYS_VIA_R13_IFR
+    ;}
 
     ; Set timer latch to 2 character lines
-    lda #LO(1022) : sta SYS_VIA_R6_T1L_L
-    lda #HI(1022) : sta SYS_VIA_R7_T1L_H
+    ;lda #LO(1022) : sta SYS_VIA_R6_T1L_L
+    ;lda #HI(1022) : sta SYS_VIA_R7_T1L_H
 
     ; Wait for Scanline_Timer
     {
@@ -63,19 +64,8 @@ include "background.asm"
     }
 
     ; Set background colour
-    ULA_SET_PALETTE 0, COL_WHITE
-
-    ; Wait for Scanline_Timer
-    {
-        lda #&40
-    .wait
-        bit SYS_VIA_R13_IFR
-        beq wait
-        sta SYS_VIA_R13_IFR
-    }
-
-    ; Set background colour
-    ULA_SET_PALETTE 0, COL_BLACK
+    ULA_SET_PALETTE 0, COL_RED
+    ULA_SET_PALETTE 3, COL_WHITE
 
     ; Set rupture screen 1
     ;jsr rupture_R1
@@ -88,7 +78,8 @@ include "background.asm"
     sta SYS_VIA_R13_IFR
 
     ; Set background colour
-    ULA_SET_PALETTE 0, COL_BLACK
+    ULA_SET_PALETTE 0, COL_WHITE
+    ULA_SET_PALETTE 3, COL_BLACK
 
     ; Set rupture screen 0
     ;jsr rupture_R0
@@ -117,4 +108,19 @@ include "keyboard.asm"
 .end:
 
 SAVE "main", start, end, main_entry
-print ~start, ~end, ~main_entry
+print "=============================================="
+print "Start: ", ~start, "    End: ", ~end, "    Execute: ", ~main_entry
+print "=============================================="
+print "                        .init_text_mode: ", ~init_text_mode
+print "                          .instructions: ", ~instructions
+print "                          .clear_screen: ", ~clear_screen
+print "                    .init_graphics_mode: ", ~init_graphics_mode
+print "                            .test_chars: ", ~test_chars
+print "                          .test_sprites: ", ~test_sprites
+print "                            .draw_car_a: ", ~draw_car_a
+print "                  .background_draw_home: ", ~background_draw_home
+print "                 .background_draw_grass: ", ~background_draw_grass
+print "                   .init_scanline_timer: ", ~init_scanline_timer
+print "                         .init_keyboard: ", ~init_keyboard
+print "                          .rupture_init: ", ~rupture_init
+print "=============================================="
