@@ -37,7 +37,7 @@ include "background.asm"
     ;jsr background_draw_grass
     jsr init_scanline_timer
     ;jsr init_keyboard
-    ;jsr rupture_init
+    jsr rupture_init
 
     ; Main loop
 .main_loop
@@ -107,6 +107,11 @@ include "keyboard.asm"
 
 .end:
 
+MACRO ABXHEX_STRING
+    value = 0
+    LEFT$("$000", 5 - LEN(STR$~(value))), STR$~(value)
+ENDMACRO
+
 SAVE "main", start, end, main_entry
 print "=============================================="
 print "Start: ", ~start, "    End: ", ~end, "    Execute: ", ~main_entry
@@ -124,7 +129,7 @@ print "                   .init_scanline_timer: ", ~init_scanline_timer
 print "                         .init_keyboard: ", ~init_keyboard
 print "                          .rupture_init: ", ~rupture_init
 print "=============================================="
-print "     T1 Timer Setup Time:   ", SYS_VIA_T1_SET_TIME, "microseconds"
-print "     T1 Timer Latch Time:   ", SYS_VIA_T1_LATCH_TIME, "microseconds"
+print "     T1 Timer Setup Time:   ", LEFT$("$000", 5 - LEN(STR$~(SYS_VIA_T1_SET_TIME))), STR$~(SYS_VIA_T1_SET_TIME), " microseconds ( ", SYS_VIA_T1_SET_TIME, ")"
+print "     T1 Timer Latch Time:   ", LEFT$("$000", 5 - LEN(STR$~(SYS_VIA_T1_LATCH_TIME))), STR$~(SYS_VIA_T1_LATCH_TIME), " microseconds ( ", SYS_VIA_T1_LATCH_TIME, ")"
 print "    Display Refresh Rate: ", DISPLAY_REFRESH, "Hz"
 print "=============================================="
