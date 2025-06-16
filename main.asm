@@ -107,11 +107,6 @@ include "keyboard.asm"
 
 .end:
 
-MACRO ABXHEX_STRING
-    value = 0
-    LEFT$("$000", 5 - LEN(STR$~(value))), STR$~(value)
-ENDMACRO
-
 SAVE "main", start, end, main_entry
 print "=============================================="
 print "Start: ", ~start, "    End: ", ~end, "    Execute: ", ~main_entry
