@@ -1,4 +1,45 @@
-; 6845 CRTC Rupture settings for region R0 [Line 0 - 11]
+; Initialise 6845 registers for vertical rupture
+.rupture_init
+{
+    ; Wait for vsync
+    {
+        lda #&02
+    .wait
+        bit SYS_VIA_R13_IFR
+        beq wait
+        sta SYS_VIA_R13_IFR
+    }
+
+    ; Set vsync position
+    lda #&07 : sta CRTC_REG
+    lda #&13 : sta CRTC_DATA
+
+    ; Set total and visible character lines
+    lda #&04 : sta CRTC_REG
+    lda #&26 : sta CRTC_DATA
+
+    lda #&06 : sta CRTC_REG
+    lda #&0C : sta CRTC_DATA
+
+    ; Set screen start address
+    lda #&0c : sta CRTC_REG
+    lda #&0a : sta CRTC_DATA
+
+    lda #&0d : sta CRTC_REG
+    lda #&00 : sta CRTC_DATA
+
+    ; Reset T1 interrupt flag
+    lda #&40 : sta SYS_VIA_R13_IFR
+
+    ; Reset rupture counter
+    lda #&00
+    sta RUPTURE_COUNTER
+
+.exit
+    rts
+}
+
+; 6845 CRTC Rupture settings for region R0 [Lines 0 - 11]
 ; Screen address: &5000 - fixed address
 ;
 ; 12 character lines
@@ -7,38 +48,27 @@
 ;
 .rupture_R0
 {
-    ; Set vsync position to off screen
-    lda #&07
-    sta CRTC_REG
-    lda #&13
-    sta CRTC_DATA
-
     ; Set number of character lines
-    lda #&04
-    sta CRTC_REG
-    lda #&1A
-    sta CRTC_DATA
+    ; for current region
+    lda #&04 : sta CRTC_REG
+    lda #&1A : sta CRTC_DATA
 
-    lda #&06
-    sta CRTC_REG
-    lda #&0C
-    sta CRTC_DATA
+    lda #&06 : sta CRTC_REG
+    lda #&0C : sta CRTC_DATA
 
     ; Set screen start address
-    lda #&0c
-    sta CRTC_REG
-    lda #&0a
-    sta CRTC_DATA
-    lda #&0d
-    sta CRTC_REG
-    lda #&00
-    sta CRTC_DATA
+    ; for next region
+    lda #&0c : sta CRTC_REG
+    lda #&0a : sta CRTC_DATA
+
+    lda #&0d : sta CRTC_REG
+    lda #&00 : sta CRTC_DATA
 
 .exit
     rts
 }
 
-; 6845 CRTC Rupture settings for region R1 [Line 12 - 23]
+; 6845 CRTC Rupture settings for region R1 [Lines 12 - 23]
 ; Screen address: &6a00 + scroll offset
 ;
 ; 12 character lines
@@ -46,28 +76,25 @@
 ; 
 ; last rupture section - vsync
 ; vertical blanking
-;
 ; 15 character lines
 ; 120 scanlines
 ;
 .rupture_R1
 {
     ; Set number of character lines
-    lda #&04
-    sta CRTC_REG
-    lda #&0B
-    sta CRTC_DATA
+    lda #&04 : sta CRTC_REG
+    lda #&0B : sta CRTC_DATA
 
     ; Set screen start address
-    lda #&0c
-    sta CRTC_REG
-    lda #&0d
-    sta CRTC_DATA
-    lda #&0d
-    sta CRTC_REG
+    lda #&0c : sta CRTC_REG
+    lda #&0d : sta CRTC_DATA
+
     ldx &00
-    lda &1800, x
-    sta CRTC_DATA
+    lda #&0d : sta CRTC_REG
+    lda &1800, x : sta CRTC_DATA
+
+    ; Increase rupture counter
+    inc RUPTURE_COUNTER
 
 .exit
     rts
