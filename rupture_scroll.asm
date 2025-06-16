@@ -23,10 +23,10 @@
 
     ; Set screen start address
     lda #&0c : sta CRTC_REG
-    lda #&0a : sta CRTC_DATA
+    lda #SCR_HI : sta CRTC_DATA
 
     lda #&0d : sta CRTC_REG
-    lda #&00 : sta CRTC_DATA
+    lda #SCR_LO : sta CRTC_DATA
 
     ; Reset T1 interrupt flag
     lda #&40 : sta SYS_VIA_R13_IFR
