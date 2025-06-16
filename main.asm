@@ -124,8 +124,7 @@ print "                   .init_scanline_timer: ", ~init_scanline_timer
 print "                         .init_keyboard: ", ~init_keyboard
 print "                          .rupture_init: ", ~rupture_init
 print "=============================================="
-print "T1 Timer Setup Time: ", SYS_VIA_T1_SET_TIME, "microseconds"
-print "T1 Timer Latch Time: ", SYS_VIA_T1_LATCH_TIME, "microseconds"
-print ""
-print "Display Refresh Rate: ", DISPLAY_REFRESH, "Hz"
+print "     T1 Timer Setup Time:   ", SYS_VIA_T1_SET_TIME, "microseconds"
+print "     T1 Timer Latch Time:   ", SYS_VIA_T1_LATCH_TIME, "microseconds"
+print "    Display Refresh Rate: ", DISPLAY_REFRESH, "Hz"
 print "=============================================="
