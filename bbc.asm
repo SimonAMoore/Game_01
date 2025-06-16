@@ -1,7 +1,11 @@
+;===============================================================================
+
 SHEILA = &FE00
 OSRDCH = &FFE0
 OSWRCH = &FFEE
 OSBYTE = &FFF4
+
+;===============================================================================
 
 CRTC_REG  = SHEILA + &00
 CRTC_DATA = SHEILA + &01
@@ -9,7 +13,10 @@ CRTC_DATA = SHEILA + &01
 VIDEO_ULA_CONTROL_REG = SHEILA + &20
 VIDEO_ULA_PALETTE_REG = SHEILA + &21
 
-SYS_VIA = SHEILA + &40
+;===============================================================================
+
+SYS_VIA             = SHEILA + &40
+USER_VIA            = SHEILA + &60
 
 SYS_VIA_R0_ORB_IRB  = SYS_VIA + &00
 SYS_VIA_R1_ORA_IRA  = SYS_VIA + &01
@@ -28,8 +35,6 @@ SYS_VIA_R13_IFR     = SYS_VIA + &0D
 SYS_VIA_R14_IER     = SYS_VIA + &0E
 SYS_VIA_R15_ORA_IRA = SYS_VIA + &0F
 
-USER_VIA = SHEILA + &60
-
 USER_VIA_R0_ORB_IRB  = USER_VIA + &00
 USER_VIA_R1_ORA_IRA  = USER_VIA + &01
 USER_VIA_R2_DDRB     = USER_VIA + &02
@@ -47,8 +52,12 @@ USER_VIA_R13_IFR     = USER_VIA + &0D
 USER_VIA_R14_IER     = USER_VIA + &0E
 USER_VIA_R15_ORA_IRA = USER_VIA + &0F
 
+;===============================================================================
+
 IRQ_1 = &204
 IRQ_2 = &206
+
+;===============================================================================
 
 SCREEN_ADDR = &3000
 
@@ -57,7 +66,7 @@ SCR_HI = HI(SCREEN_ADDR DIV 8)
 
 GRAPHICS_MODE = 1
 
-IF GRAPHICS_MODE = 1
+IF GRAPHICS_MODE = 1 OR GRAPHICS_MODE = 5
     MACRO ULA_SET_PALETTE logical, actual
         IF logical = 0
             lda #&00 + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
@@ -77,6 +86,12 @@ IF GRAPHICS_MODE = 1
 ENDMACRO
 ENDIF
 
+IF GRAPHICS_MODE = 2
+    MACRO ULA_SET_PALETTE logical, actual
+        lda (logical * &100) + (actual EOR 7) : sta VIDEO_ULA_PALETTE_REG
+ENDMACRO
+ENDIF
+
 COL_BLACK   = 0
 COL_RED     = 1
 COL_GREEN   = 2
@@ -85,3 +100,18 @@ COL_BLUE    = 4
 COL_MAGENTA = 5
 COL_CYAN    = 6
 COL_WHITE   = 7
+
+;===============================================================================
+
+Line      = 12                                          ; Character line for T1 to trigger just before
+Adjust    = 5                                           ; Adjustment for timer to trigger just before horizontal blanking
+H_Refresh = 64                                          ; Horizontal refresh period in microseconds
+V_Refresh = 20000 - 32                                  ; Vertical refresh period in microseconds (-32us half scanline for non-interlaced mode)
+Scanline  = (8 + Line) * 8                              ; Calculate scanline to trigger timer on
+
+SYS_VIA_T1_SET_TIME   = Scanline * H_Refresh + Adjust   ; Initial time needed for timer to sync with vertical refresh
+SYS_VIA_T1_LATCH_TIME = V_Refresh - 2                   ; T1 Latch Time (-2us for timer load)
+
+DISPLAY_REFRESH = 1000000 / V_Refresh                   ; Calculate display refresh rate (Hz)
+
+;===============================================================================
