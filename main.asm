@@ -13,7 +13,7 @@ ORG     &1800
 }
 
 ORG     &1900
-GUARD   &5000
+GUARD   &2c00
 
 include "charset.asm"
 include "sprites.asm"
