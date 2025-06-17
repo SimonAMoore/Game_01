@@ -1,5 +1,6 @@
 ;6845 register values for custom graphics mode 256 x 192 - 4 Colour (12 KBytes)
-.graphics_mode_data
+.graphics_mode_data {
+.start
     equb    &7F         ; R0 - Horizontal Total = 127
     equb    &40         ; R1 - Horizontal Displayed = 64
     equb    &5A         ; R2 - Horizontal Sync Position = 90
@@ -14,8 +15,12 @@
     equb    &08         ; R11 - Cursor End = 8
     equb    SCR_HI      ; R12 - Screen Address DIV 8 MSB
     equb    SCR_LO      ; R13 - Screen Address DIV 8 LSB
+.end
+TABLE_ALIGNED
+}
 
-.palette_data
+.palette_data {
+.start
     equb    &03         ; %0000, 0.0 = 3 (Blue = 4 EOR 7)
     equb    &13         ; %0001, 0.1 = 3
     equb    &43         ; %0100, 0.2 = 3
@@ -32,6 +37,9 @@
     equb    &B2         ; %1011, 3.1 = 2
     equb    &E2         ; %1110, 3.2 = 2
     equb    &F2         ; %1111, 3.3 = 2
+.end
+TABLE_ALIGNED
+}
 
 .init_graphics_mode
 {
@@ -70,54 +78,54 @@
     lda #&00
     tay
 .loop
-    sta &5000,y
-    sta &5100,y
-    sta &5200,y
-    sta &5300,y
-    sta &5400,y
-    sta &5500,y
-    sta &5600,y
-    sta &5700,y
-    sta &5800,y
-    sta &5900,y
-    sta &5A00,y
-    sta &5B00,y
-    sta &5C00,y
-    sta &5D00,y
-    sta &5E00,y
-    sta &5F00,y
-    sta &6000,y
-    sta &6100,y
-    sta &6200,y
-    sta &6300,y
-    sta &6400,y
-    sta &6500,y
-    sta &6600,y
-    sta &6700,y
-    sta &6800,y
-    sta &6900,y
-    sta &6A00,y
-    sta &6B00,y
-    sta &6C00,y
-    sta &6D00,y
-    sta &6E00,y
-    sta &6F00,y
-    sta &7000,y
-    sta &7100,y
-    sta &7200,y
-    sta &7300,y
-    sta &7400,y
-    sta &7500,y
-    sta &7600,y
-    sta &7700,y
-    sta &7800,y
-    sta &7900,y
-    sta &7A00,y
-    sta &7B00,y
-    sta &7C00,y
-    sta &7D00,y
-    sta &7E00,y
-    sta &7F00,y 
+    sta SCREEN_ADDR + &0000,y
+    sta SCREEN_ADDR + &0100,y
+    sta SCREEN_ADDR + &0200,y
+    sta SCREEN_ADDR + &0300,y
+    sta SCREEN_ADDR + &0400,y
+    sta SCREEN_ADDR + &0500,y
+    sta SCREEN_ADDR + &0600,y
+    sta SCREEN_ADDR + &0700,y
+    sta SCREEN_ADDR + &0800,y
+    sta SCREEN_ADDR + &0900,y
+    sta SCREEN_ADDR + &0a00,y
+    sta SCREEN_ADDR + &0b00,y
+    sta SCREEN_ADDR + &0c00,y
+    sta SCREEN_ADDR + &0d00,y
+    sta SCREEN_ADDR + &0e00,y
+    sta SCREEN_ADDR + &0f00,y
+    sta SCREEN_ADDR + &1000,y
+    sta SCREEN_ADDR + &1100,y
+    sta SCREEN_ADDR + &1200,y
+    sta SCREEN_ADDR + &1300,y
+    sta SCREEN_ADDR + &1400,y
+    sta SCREEN_ADDR + &1500,y
+    sta SCREEN_ADDR + &1600,y
+    sta SCREEN_ADDR + &1700,y
+    sta SCREEN_ADDR + &1800,y
+    sta SCREEN_ADDR + &1900,y
+    sta SCREEN_ADDR + &1a00,y
+    sta SCREEN_ADDR + &1b00,y
+    sta SCREEN_ADDR + &1c00,y
+    sta SCREEN_ADDR + &1d00,y
+    sta SCREEN_ADDR + &1e00,y
+    sta SCREEN_ADDR + &1f00,y
+    sta SCREEN_ADDR + &2000,y
+    sta SCREEN_ADDR + &2100,y
+    sta SCREEN_ADDR + &2200,y
+    sta SCREEN_ADDR + &2300,y
+    sta SCREEN_ADDR + &2400,y
+    sta SCREEN_ADDR + &2500,y
+    sta SCREEN_ADDR + &2600,y
+    sta SCREEN_ADDR + &2700,y
+    sta SCREEN_ADDR + &2800,y
+    sta SCREEN_ADDR + &2900,y
+    sta SCREEN_ADDR + &2a00,y
+    sta SCREEN_ADDR + &2b00,y
+    sta SCREEN_ADDR + &2c00,y
+    sta SCREEN_ADDR + &2d00,y
+    sta SCREEN_ADDR + &2e00,y
+    sta SCREEN_ADDR + &2f00,y 
     iny
     beq exit
     jmp loop
