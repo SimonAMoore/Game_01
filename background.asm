@@ -106,43 +106,49 @@
 
 .background_draw_home
 {
-    ldy #&02 : sty TEMP_3       ; y offset for sprite drawing routine
-    ldx #95                     ; Total number of sprites to draw
+    ; Store screen address of line &01 in TEMP_ADDR_3
+    ldy #&01
+    lda background_y_addr_offset, y
+    sta TEMP_ADDR_3_HI
+    lda #&00
+    sta TEMP_ADDR_3_LO
+
+    ldx #95                             ; Total number of sprites to draw
 .loop_1
-    lda background_data, x      ; Load the sprite index to draw next
-    jsr background_draw_sprite  ; Draw sprite on display
+    lda background_data, x              ; Load the sprite index to draw next
+    jsr background_draw_sprite          ; Draw sprite on display
     dex
     bpl loop_1
+
 .exit
     rts
 }
+print ~background_draw_home
 
-.background_draw_grass_bars
+.background_draw_grass
 {
+    ; Get screen address for line &0c, store in TEMP_ADDR_3
+    ldy #&0c
+    lda background_y_addr_offset, y
+    sta TEMP_ADDR_3_HI
+    lda #&00
+    sta TEMP_ADDR_3_LO
+
     ldx #&3F
 .loop_1
     lda background_data + 96, X
     jsr background_draw_sprite
     dex
     bpl loop_1
-.exit
-    rts
-}
-
-.background_draw_grass
-{
-    ldy #&18 : sty TEMP_3               ; y offset for sprite drawing routine
-    jsr background_draw_grass_bars
-    ldy #&2c : sty TEMP_3               ; y offset for sprite drawing routine
-    jsr background_draw_grass_bars
 
 .exit
     rts
 }
+
 .background_draw_sprite
 {
 ; Draw background sprite with index in Accumulator at x position in X Register
-; Screen offset in TEMP_3_LO
+; Screen address in TEMP_3_ADDR
 
     ; Multiply accumulator by 16 (A << 4) to get offset into sprite data
     asl a
@@ -173,20 +179,13 @@
     rol TEMP_1_LO
     rol TEMP_1_HI
 
-    ; Get screen address
-    lda #LO(SCREEN_ADDR)
-    sta TEMP_ADDR_1_LO
-    lda #HI(SCREEN_ADDR)
-    sta TEMP_ADDR_1_HI
-
-    ; Add offset to screen address + TEMP_3 y-offset
+    ; Add offset to screen address of line 'y'
     clc
     lda TEMP_1_LO
-    adc TEMP_ADDR_1_LO
+    adc TEMP_ADDR_3_LO
     sta TEMP_ADDR_1_LO
     lda TEMP_1_HI
-    adc TEMP_ADDR_1_HI
-    adc TEMP_3
+    adc TEMP_ADDR_3_HI
     sta TEMP_ADDR_1_HI
 
     ; Plot sprite
