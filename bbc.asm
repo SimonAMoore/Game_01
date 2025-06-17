@@ -115,3 +115,12 @@ SYS_VIA_T1_LATCH_TIME = V_Refresh - 2                   ; T1 Latch Time (-2us fo
 DISPLAY_REFRESH = 1000000 / V_Refresh                   ; Calculate display refresh rate (Hz)
 
 ;===============================================================================
+
+MACRO TABLE_ALIGNED
+    IF HI(start) <> HI(end)
+        ERROR "Table ", ~start, ": ", ~end, "crosses page boundary"
+    ENDIF
+    PRINT "Table ", ~start, ": ", ~end, "aligned within page boundary"
+ENDMACRO
+
+;===============================================================================
