@@ -8,7 +8,7 @@ ORG     &1800
 .init_sine_table
 {
     FOR n, 0, 255
-      equb INT((SIN(n * 2 * PI / 256) + 1) * 32.25)
+      equb INT((SIN(n * 8 * PI / 256) + 1) * 32.25)
     NEXT
 }
 
