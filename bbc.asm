@@ -59,7 +59,7 @@ IRQ_2 = &206
 
 ;===============================================================================
 
-SCREEN_ADDR = &3000
+SCREEN_ADDR = &2C00
 
 SCR_LO = LO(SCREEN_ADDR DIV 8)
 SCR_HI = HI(SCREEN_ADDR DIV 8)
