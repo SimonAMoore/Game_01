@@ -1,5 +1,6 @@
 .charset
 {
+    .start
     ; 0
     equd &66662211
     equd &00113366
@@ -239,6 +240,8 @@
     EQUD &ff888888
     EQUD &111111ff
     EQUD &ff111111
+    .end
+    TABLE_ALIGNED "charset"
 }
 
 .write_char_A_at_XY
@@ -346,6 +349,11 @@
 .exit
     rts
 
-.x_position_data
-    equb &02, &05, &08, &0b, &0e, &11, &14, &17, &1a, &1d
+    .x_position_data
+    {
+        .start
+        equb &02, &05, &08, &0b, &0e, &11, &14, &17, &1a, &1d
+        .end
+        TABLE_ALIGNED "x_position_data"
+    }
 }
