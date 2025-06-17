@@ -105,11 +105,7 @@
     lda #&01 : sta CRTC_DATA
 
     ; Increase rupture counter
-    ;inc RUPTURE_COUNTER
-    ;lda RUPTURE_COUNTER
-    ;cmp #24
-    ;bne exit
-    ;stx RUPTURE_COUNTER
+    inc RUPTURE_COUNTER
 
 .exit
     rts
@@ -138,6 +134,15 @@
     ; Reset rupture counter
     lda #&00
     sta RUPTURE_COUNTER
+
+    clc
+    lda RUPTURE_COUNTER     ; load rupture counter
+    adc FRAME_COUNTER       ; add frame counter
+    tax                     ; transfer to x index
+    lda &1800, x            ; load offset from sine table
+    tax
+    lda #&0d : sta CRTC_REG
+    txa : sta CRTC_DATA
 
     ; Increase frame counter
     inc FRAME_COUNTER
