@@ -48,6 +48,10 @@
     ; Initialise video ULA
     lda #&9A : ldx #&18 : jsr OSBYTE
 
+    ; TEMP
+    rts
+    ; TEMP
+    
     ; Initialise colour palette
     ldy #&0F
 .loop2
