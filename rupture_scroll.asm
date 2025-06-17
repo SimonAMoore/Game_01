@@ -90,7 +90,7 @@
     lda RUPTURE_COUNTER     ; load rupture counter
     adc FRAME_COUNTER       ; add frame counter
     tax                     ; transfer to x index
-    lda &1800, x            ; load offset from sine table
+    lda sine_table, x       ; load offset from sine table
     tax
     lda #&0d : sta CRTC_REG
     txa : sta CRTC_DATA
