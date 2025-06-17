@@ -16,7 +16,7 @@ ORG     &1800
 }
 
 ORG     &1900
-GUARD   &2c00
+GUARD   SCREEN_ADDR
 
 include "charset.asm"
 include "sprites.asm"
@@ -31,16 +31,19 @@ include "background.asm"
     ;jsr init_text_mode
     ;jsr instructions
     ;jsr clear_screen
-    jsr test_screen
+    ;jsr test_screen
     jsr init_graphics_mode
     ;jsr test_chars
     ;jsr test_sprites
     ;jsr draw_car_a
-    ;jsr background_draw_home
-    ;jsr background_draw_grass
-    jsr init_scanline_timer
+    jsr background_draw_home
+    jsr background_draw_grass
+    ;jsr init_scanline_timer
     ;jsr init_keyboard
-    jsr rupture_init
+    ;jsr rupture_init
+
+.brk
+    jmp brk
 
     ; Main loop
 .main_loop
