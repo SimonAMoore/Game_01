@@ -25,8 +25,8 @@ include "background.asm"
     lda #&0f : ldx #&00 : jsr OSBYTE
 
     ; Initialise
-    ;jsr init_text_mode
-    ;jsr instructions
+    jsr init_text_mode
+    jsr instructions
     ;jsr clear_screen
     jsr test_screen
     jsr init_graphics_mode
@@ -126,24 +126,24 @@ include "keyboard.asm"
 .end:
 
 SAVE "main", start, end, main_entry
-print "=============================================="
-print "Start: ", ~start, "    End: ", ~end, "    Execute: ", ~main_entry
-print "=============================================="
-print "                            .sine_table: ", ~sine_table
-print "                        .init_text_mode: ", ~init_text_mode
-print "                          .instructions: ", ~instructions
-print "                          .clear_screen: ", ~clear_screen
-print "                    .init_graphics_mode: ", ~init_graphics_mode
-print "                            .test_chars: ", ~test_chars
-print "                          .test_sprites: ", ~test_sprites
-print "                            .draw_car_a: ", ~draw_car_a
-print "                  .background_draw_home: ", ~background_draw_home
-print "                 .background_draw_grass: ", ~background_draw_grass
-print "                   .init_scanline_timer: ", ~init_scanline_timer
-print "                         .init_keyboard: ", ~init_keyboard
-print "                          .rupture_init: ", ~rupture_init
-print "=============================================="
-print "     T1 Timer Setup Time:   ", LEFT$("$0000", 5 - LEN(STR$~(SYS_VIA_T1_SET_TIME))), STR$~(SYS_VIA_T1_SET_TIME), " microseconds ( ", SYS_VIA_T1_SET_TIME, ")"
-print "     T1 Timer Latch Time:   ", LEFT$("$0000", 5 - LEN(STR$~(SYS_VIA_T1_LATCH_TIME))), STR$~(SYS_VIA_T1_LATCH_TIME), " microseconds ( ", SYS_VIA_T1_LATCH_TIME, ")"
-print "    Display Refresh Rate: ", DISPLAY_REFRESH, "Hz"
-print "=============================================="
+print "================================================"
+print " Start: ", ~start, "    End: ", ~end, "    Execute: ", ~main_entry
+print "================================================"
+print "                             .sine_table: ", ~sine_table
+print "                         .init_text_mode: ", ~init_text_mode
+print "                           .instructions: ", ~instructions
+print "                           .clear_screen: ", ~clear_screen
+print "                     .init_graphics_mode: ", ~init_graphics_mode
+print "                             .test_chars: ", ~test_chars
+print "                           .test_sprites: ", ~test_sprites
+print "                             .draw_car_a: ", ~draw_car_a
+print "                   .background_draw_home: ", ~background_draw_home
+print "                  .background_draw_grass: ", ~background_draw_grass
+print "                    .init_scanline_timer: ", ~init_scanline_timer
+print "                          .init_keyboard: ", ~init_keyboard
+print "                           .rupture_init: ", ~rupture_init
+print "================================================"
+print "      T1 Timer Setup Time:   ", LEFT$("$0000", 5 - LEN(STR$~(SYS_VIA_T1_SET_TIME))), STR$~(SYS_VIA_T1_SET_TIME), " microseconds ( ", SYS_VIA_T1_SET_TIME, ")"
+print "      T1 Timer Latch Time:   ", LEFT$("$0000", 5 - LEN(STR$~(SYS_VIA_T1_LATCH_TIME))), STR$~(SYS_VIA_T1_LATCH_TIME), " microseconds ( ", SYS_VIA_T1_LATCH_TIME, ")"
+print "     Display Refresh Rate: ", DISPLAY_REFRESH, "Hz"
+print "================================================"
