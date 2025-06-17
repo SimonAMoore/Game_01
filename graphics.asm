@@ -58,17 +58,13 @@
     ; Initialise video ULA
     lda #&9A : ldx #&18 : jsr OSBYTE
 
-    ; TEMP
-    rts
-    ; TEMP
-    
     ; Initialise colour palette
     ldy #&0F
-.loop2
+.loop_2
     lda palette_data, y
     sta VIDEO_ULA_PALETTE_REG
     dey
-    bpl loop2
+    bpl loop_2
     cli
 
 .exit
