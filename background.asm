@@ -1,14 +1,18 @@
 .background_data
 {
+    .start
     equb &04, &04, &01, &02, &02, &00, &04, &04, &01, &02, &02, &00, &04, &04, &01, &02, &02, &00, &04, &04, &01, &02, &02, &00, &04, &04, &01, &02, &02, &00, &04, &04
     equb &04, &04, &05, &07, &07, &03, &04, &04, &05, &07, &07, &03, &04, &04, &05, &07, &07, &03, &04, &04, &05, &07, &07, &03, &04, &04, &05, &07, &07, &03, &04, &04
     equb &02, &02, &08, &07, &07, &06, &02, &02, &08, &07, &07, &06, &02, &02, &08, &07, &07, &06, &02, &02, &08, &07, &07, &06, &02, &02, &08, &07, &07, &06, &02, &02
     equb &09, &0a, &09, &0a, &09, &0a, &09, &0a, &09, &0a, &09, &0a, &09, &0a, &09, &0a, &09, &0a, &09, &0a, &09, &0a, &09, &0a, &09, &0a, &09, &0a, &09, &0a, &09, &0a
     equb &0b, &0c, &0b, &0c, &0b, &0c, &0b, &0c, &0b, &0c, &0b, &0c, &0b, &0c, &0b, &0c, &0b, &0c, &0b, &0c, &0b, &0c, &0b, &0c, &0b, &0c, &0b, &0c, &0b, &0c, &0b, &0c    
+    .end
+    TABLE_ALIGNED "background_data"
 }
 
 .background_sprite_data
 {
+    .start
     ; Home Block 0
     equd &0d380f0e
     equd &2161c30f
@@ -86,13 +90,18 @@
     equd &030f8fc7
     equd &8fc78f0f
     equd &000f0f0f
+    .end
+    TABLE_ALIGNED "background_sprite_data"
 }
 
-.y_addr_offset
+.background_y_addr_offset
 {
+    .start
     ; MSB of screen address for each line of screen 0-23.
     equb &2C, &2E, &30, &32, &34, &3C, &44, &4C, &34, &3C, &44, &4C
     equb &54, &56, &58, &60, &68, &6C, &68, &6c, &70, &78, &54, &56
+    .end
+    TABLE_ALIGNED "background_y_addr_offset"
 }
 
 .background_draw_home
