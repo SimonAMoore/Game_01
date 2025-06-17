@@ -10,6 +10,10 @@ GUARD   &ff
 .TEMP_X skip 1
 .TEMP_Y skip 1
 
+.TEMP_A2 skip 1
+.TEMP_X2 skip 1
+.TEMP_Y2 skip 1
+
 ; 16-bit temporary storage
 .TEMP_1_LO skip 1
 .TEMP_1_HI skip 1
