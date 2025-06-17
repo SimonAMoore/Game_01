@@ -179,7 +179,7 @@ print ~background_draw_home
     rol TEMP_1_LO
     rol TEMP_1_HI
 
-    ; Add offset to screen address of line 'y'
+    ; Add offset to screen address in TEMP_ADDR_3
     clc
     lda TEMP_1_LO
     adc TEMP_ADDR_3_LO
