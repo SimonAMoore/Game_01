@@ -1,18 +1,65 @@
 ; Initialise 6845 registers for vertical rupture
 .rupture_init
 {
-    ; Wait for vsync
+    ; Disable all interrupts and events 
+    sei
+    lda #&7f                ; 01111111b
+    sta USER_VIA_R14_IER
+    sta SYS_VIA_R14_IER
+
+    ; Enable VSync and System Timer 1
+    lda #&C2                ; 11000010b
+    sta SYS_VIA_R14_IER
+
+    ; Synchronize to exact VSync and initialise Timer 1
+    lda #&02
     {
-        lda #&02
-    .wait
+    .wait_vsync
+        nop
         bit SYS_VIA_R13_IFR
-        beq wait
+        beq wait_vsync
         sta SYS_VIA_R13_IFR
     }
 
+    nop : nop : nop 
+    ldy #&08
+    ldx #&00
+    stx TEMP_1
+        
+.loop
+    ldx #&00
+    {
+    .wait_vsync
+        inx
+        bit SYS_VIA_R13_IFR
+        beq wait_vsync
+        sta SYS_VIA_R13_IFR
+    }
+    cpx TEMP_1
+    stx TEMP_1
+    bcc skip
+    dey
+    bne loop
+.skip
+
+    ; Set T1 Timer. Start just before end of last line
+    ; Repeat every 8 scanlines
+    lda #LO(SYS_VIA_T1_SET_TIME) : sta SYS_VIA_R4_T1C_L
+    lda #HI(SYS_VIA_T1_SET_TIME) : sta SYS_VIA_R5_T1C_H
+    lda #LO(H_Refresh * 8 - 2) : sta SYS_VIA_R6_T1L_L
+    lda #HI(H_Refresh * 8 - 2) : sta SYS_VIA_R7_T1L_H
+
+    ; Reset rupture counter
+    lda #&00
+    sta RUPTURE_COUNTER
+
+    ; Reset frame counter
+    lda #&00
+    sta FRAME_COUNTER
+
     ; Set vsync position
     lda #&07 : sta CRTC_REG
-    lda #&13 : sta CRTC_DATA
+    lda #&08 : sta CRTC_DATA
 
     ; Set total and visible character lines
     lda #&04 : sta CRTC_REG
@@ -28,41 +75,41 @@
     lda #&0d : sta CRTC_REG
     lda #SCR_LO : sta CRTC_DATA
 
-    ; Reset T1 interrupt flag
-    lda #&40 : sta SYS_VIA_R13_IFR
-
-    ; Reset rupture counter
-    lda #&00
-    sta RUPTURE_COUNTER
-
 .exit
     rts
 }
 
-; 6845 CRTC Rupture settings for region R0 [Lines 0 - 11]
-; Screen address: &5000 - fixed address
-;
-; 12 character lines
-; 96 scanlines
-; no-vsync
-;
+; 6845 CRTC Rupture settings for region R0
 .rupture_R0
 {
-    ; Set number of character lines
+    ; Set screen start address for next region
+    ;lda #&0c : sta CRTC_REG
+    ;lda #SCR_HI : sta CRTC_DATA
+
+    clc
+    lda RUPTURE_COUNTER     ; load rupture counter
+    adc FRAME_COUNTER       ; add frame counter
+    tax                     ; transfer to x index
+    lda &1800, x            ; load offset from sine table
+    tax
+    lda #&0d : sta CRTC_REG
+    txa : sta CRTC_DATA
+
+    ; Set number of character lines - 1
     ; for current region
     lda #&04 : sta CRTC_REG
-    lda #&1A : sta CRTC_DATA
-
-    lda #&06 : sta CRTC_REG
-    lda #&0C : sta CRTC_DATA
-
-    ; Set screen start address
-    ; for next region
-    lda #&0c : sta CRTC_REG
-    lda #&0a : sta CRTC_DATA
-
-    lda #&0d : sta CRTC_REG
     lda #&00 : sta CRTC_DATA
+
+    ; Set number of visible character lines
+    lda #&06 : sta CRTC_REG
+    lda #&01 : sta CRTC_DATA
+
+    ; Increase rupture counter
+    ;inc RUPTURE_COUNTER
+    ;lda RUPTURE_COUNTER
+    ;cmp #24
+    ;bne exit
+    ;stx RUPTURE_COUNTER
 
 .exit
     rts
@@ -81,20 +128,23 @@
 ;
 .rupture_R1
 {
+    ; Set screen start address for next region
+    ;lda #&0c : sta CRTC_REG
+    ;lda #SCR_HI : sta CRTC_DATA
+
+    ;lda #&0d : sta CRTC_REG
+    ;lda #SCR_LO : sta CRTC_DATA
+
+    ; Reset rupture counter
+    lda #&00
+    sta RUPTURE_COUNTER
+
+    ; Increase frame counter
+    inc FRAME_COUNTER
+
     ; Set number of character lines
     lda #&04 : sta CRTC_REG
-    lda #&0B : sta CRTC_DATA
-
-    ; Set screen start address
-    lda #&0c : sta CRTC_REG
-    lda #&0d : sta CRTC_DATA
-
-    ldx &00
-    lda #&0d : sta CRTC_REG
-    lda &1800, x : sta CRTC_DATA
-
-    ; Increase rupture counter
-    inc RUPTURE_COUNTER
+    lda #&0f : sta CRTC_DATA
 
 .exit
     rts
