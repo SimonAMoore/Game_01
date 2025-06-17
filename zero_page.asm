@@ -2,7 +2,8 @@
 ORG     &00
 GUARD   &ff
 
-.RUPTURE_COUNTER skip 1
+.RUPTURE_COUNTER    skip 1
+.FRAME_COUNTER      skip 1
 
 ; Register temporary storage
 .TEMP_A skip 1
