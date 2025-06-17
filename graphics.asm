@@ -1,6 +1,7 @@
 ;6845 register values for custom graphics mode 256 x 192 - 4 Colour (12 KBytes)
-.graphics_mode_data {
-.start
+.graphics_mode_data
+{
+    .start
     equb    &7F         ; R0 - Horizontal Total = 127
     equb    &40         ; R1 - Horizontal Displayed = 64
     equb    &5A         ; R2 - Horizontal Sync Position = 90
@@ -15,12 +16,13 @@
     equb    &08         ; R11 - Cursor End = 8
     equb    SCR_HI      ; R12 - Screen Address DIV 8 MSB
     equb    SCR_LO      ; R13 - Screen Address DIV 8 LSB
-.end
-TABLE_ALIGNED
+    .end
+    TABLE_ALIGNED "graphics_mode_data"
 }
 
-.palette_data {
-.start
+.palette_data
+{
+    .start
     equb    &03         ; %0000, 0.0 = 3 (Blue = 4 EOR 7)
     equb    &13         ; %0001, 0.1 = 3
     equb    &43         ; %0100, 0.2 = 3
@@ -37,8 +39,8 @@ TABLE_ALIGNED
     equb    &B2         ; %1011, 3.1 = 2
     equb    &E2         ; %1110, 3.2 = 2
     equb    &F2         ; %1111, 3.3 = 2
-.end
-TABLE_ALIGNED
+    .end
+    TABLE_ALIGNED "palette_data"
 }
 
 .init_graphics_mode
