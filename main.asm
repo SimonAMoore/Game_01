@@ -7,9 +7,12 @@ ORG     &1800
 
 .sine_table
 {
+    .start
     FOR n, 0, 255
       equb INT((SIN(n * 8 * PI / 256) + 1) * 32.25)
     NEXT
+    .end
+    TABLE_ALIGNED "sine_table"
 }
 
 ORG     &1900
@@ -25,8 +28,8 @@ include "background.asm"
     lda #&0f : ldx #&00 : jsr OSBYTE
 
     ; Initialise
-    jsr init_text_mode
-    jsr instructions
+    ;jsr init_text_mode
+    ;jsr instructions
     ;jsr clear_screen
     jsr test_screen
     jsr init_graphics_mode
@@ -58,10 +61,6 @@ include "background.asm"
     ; Set rupture screen 0
     jsr rupture_R0
 
-    ; Set background colour
-    ULA_SET_PALETTE 0, COL_RED
-    ULA_SET_PALETTE 3, COL_WHITE
-
     ; Wait for Scanline_Timer Odd # Lines
     {
         lda #&40
@@ -73,9 +72,6 @@ include "background.asm"
 
     ; Set rupture screen 0
     jsr rupture_R0
-
-    ; Set background colour
-    ULA_SET_PALETTE 0, COL_BLUE
 
     ; Check for last rupture section
     ; If not repeat screen loop
@@ -100,11 +96,6 @@ include "background.asm"
     lda #HI(H_Refresh * (8 * 8 - 3) + 8) : sta SYS_VIA_R5_T1C_H
     lda #LO(H_Refresh * 8 - 2) : sta SYS_VIA_R6_T1L_L
     lda #HI(H_Refresh * 8 - 2) : sta SYS_VIA_R7_T1L_H
-
-
-    ; Set background colour
-    ;ULA_SET_PALETTE 0, COL_WHITE
-    ;ULA_SET_PALETTE 3, COL_BLACK
 
 .vertical_blanking
     ;jsr read_keys
