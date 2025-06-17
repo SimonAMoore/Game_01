@@ -38,24 +38,34 @@
 .exit
     rts
 
-.instructions_text
-    equb 223
-    equb &0D, &0A
-    equb 129, 157, 131, 141, 31, 16, 1, "GAME_01", &0D, &0A
-    equb 129, 157, 131, 141, 31, 16, 2, "GAME_01"
-    equb 31, 12, 4, 134, 141, "Instructions"
-    equb 31, 12, 5, 134, 141, "Instructions"
-    equb 31, 9, 7, "Keys:"
-    equb 31, 14, 9, "Z - left"
-    equb 31, 14, 10, "X - right"
-    equb 31, 14, 11, ". - backwards"
-    equb 31, 14, 12, "; - forwards"
-    equb 31, 8, 14, 130, "Q - Turn off all sound"
-    equb 31, 8, 15, 130, "S - Sound effects only"
-    equb 31, 8, 16, 130, "T - Music and sound"
-    equb 31, 11, 19, 131, "(C) fotosim 2025"
+    .instructions_text
+    {
+        .start
+        equb 223
+        equb &0D, &0A
+        equb 129, 157, 131, 141, 31, 16, 1, "GAME_01", &0D, &0A
+        equb 129, 157, 131, 141, 31, 16, 2, "GAME_01"
+        equb 31, 12, 4, 134, 141, "Instructions"
+        equb 31, 12, 5, 134, 141, "Instructions"
+        equb 31, 9, 7, "Keys:"
+        equb 31, 14, 9, "Z - left"
+        equb 31, 14, 10, "X - right"
+        equb 31, 14, 11, ". - backwards"
+        equb 31, 14, 12, "; - forwards"
+        equb 31, 8, 14, 130, "Q - Turn off all sound"
+        equb 31, 8, 15, 130, "S - Sound effects only"
+        equb 31, 8, 16, 130, "T - Music and sound"
+        equb 31, 11, 19, 131, "(C) fotosim 2025"
+        .end
+        TABLE_ALIGNED "instructions_text"
+    }
 
-.start_text
-    equb 39
-    equb 31, 2, 22, 134, 136, "Press SPACE BAR or (fire) to start"
+    .start_text
+    {
+        .start
+        equb 39
+        equb 31, 2, 22, 134, 136, "Press SPACE BAR or (fire) to start"
+        .end
+        TABLE_ALIGNED "start_text"
+    }
 }
