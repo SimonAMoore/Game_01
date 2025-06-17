@@ -5,7 +5,7 @@ ORG     &1800
 
 .start
 
-.init_sine_table
+.sine_table
 {
     FOR n, 0, 255
       equb INT((SIN(n * 8 * PI / 256) + 1) * 32.25)
@@ -22,7 +22,7 @@ include "background.asm"
 .main_entry:
 {
     ; Flush all buffers
-    lda #&0F : ldx #&00 : jsr OSBYTE
+    lda #&0f : ldx #&00 : jsr OSBYTE
 
     ; Initialise
     ;jsr init_text_mode
@@ -129,6 +129,7 @@ SAVE "main", start, end, main_entry
 print "=============================================="
 print "Start: ", ~start, "    End: ", ~end, "    Execute: ", ~main_entry
 print "=============================================="
+print "                            .sine_table: ", ~sine_table
 print "                        .init_text_mode: ", ~init_text_mode
 print "                          .instructions: ", ~instructions
 print "                          .clear_screen: ", ~clear_screen
