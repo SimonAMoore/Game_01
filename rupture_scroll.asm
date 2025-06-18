@@ -112,12 +112,12 @@
 
     ; Check scroll flag
     lda background_scroll_table, x
-    bne skip_1
+    bne skip_no_scroll
     lda RUPTURE_ADDR_LO_TABLE, x
     sta CRTC_DATA
-    jmp skip_2
+    jmp skip_scroll
+.skip_no_scroll
 
-.skip_1 
     clc
     txa
     adc FRAME_COUNTER
@@ -125,8 +125,8 @@
     lda sine_table, y
     adc RUPTURE_ADDR_LO_TABLE, x
     sta CRTC_DATA
+.skip_scroll
 
-.skip_2
     lda #&0c : sta CRTC_REG
     lda RUPTURE_ADDR_HI_TABLE, x
     sta CRTC_DATA
