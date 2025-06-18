@@ -119,9 +119,11 @@
 
 .skip_1 
     clc
-    lda FRAME_COUNTER
-    and #&3f
-    sbc RUPTURE_ADDR_LO_TABLE, x
+    txa
+    adc FRAME_COUNTER
+    tay
+    lda sine_table, y
+    adc RUPTURE_ADDR_LO_TABLE, x
     sta CRTC_DATA
 
 .skip_2
