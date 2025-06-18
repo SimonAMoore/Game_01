@@ -104,6 +104,14 @@
     TABLE_ALIGNED "background_y_addr_offset"
 }
 
+.background_scroll_table
+{
+    .start
+    equb &00, &00, &00, &00, &01, &01, &01, &01, &01, &01, &01, &01
+    equb &00, &00, &00, &00, &01, &01, &00, &00, &00, &00, &00, &00
+    .end
+    TABLE_ALIGNED "background_scroll_table"
+}
 .background_draw_home
 {
     ; Store screen address of line &01 in TEMP_ADDR_3
