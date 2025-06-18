@@ -1,6 +1,16 @@
 ; Initialise 6845 registers for vertical rupture
 .rupture_init
 {
+    ; Disable all interrupts and events 
+    sei
+    lda #&7f                ; 01111111b
+    sta USER_VIA_R14_IER
+    sta SYS_VIA_R14_IER
+
+    ; Enable VSync and System Timer 1
+    lda #&c2                ; 11000010b
+    sta SYS_VIA_R14_IER
+
     ; Reset rupture counter
     lda #&00
     sta RUPTURE_COUNTER
@@ -27,16 +37,6 @@
     stx RUPTURE_ADDR_LO_TABLE, y
     dey
     bpl loop_1
-
-    ; Disable all interrupts and events 
-    sei
-    lda #&7f                ; 01111111b
-    sta USER_VIA_R14_IER
-    sta SYS_VIA_R14_IER
-
-    ; Enable VSync and System Timer 1
-    lda #&c2                ; 11000010b
-    sta SYS_VIA_R14_IER
 
     ; Synchronize to exact VSync and initialise Timer 1
     lda #&02
