@@ -59,6 +59,9 @@ include "background.asm"
         sta SYS_VIA_R13_IFR
     }
 
+    ULA_SET_PALETTE 0, COL_RED
+    ULA_SET_PALETTE 3, COL_YELLOW
+
     ; Set rupture screen 0
     jsr rupture_R0
 
@@ -70,6 +73,9 @@ include "background.asm"
         beq wait
         sta SYS_VIA_R13_IFR
     }
+
+    ULA_SET_PALETTE 0, COL_BLACK
+    ULA_SET_PALETTE 3, COL_WHITE
 
     ; Set rupture screen 0
     jsr rupture_R0
@@ -93,8 +99,8 @@ include "background.asm"
     ; Set T1 timer to start just before end of vertical blanking
     ; 8 character lines - 2 scanlines - adjustment
     ; Latch T1 timer for every character line
-    lda #LO(H_Refresh * (8 * 8 - 3) + 8) : sta SYS_VIA_R4_T1C_L
-    lda #HI(H_Refresh * (8 * 8 - 3) + 8) : sta SYS_VIA_R5_T1C_H
+    lda #LO(SYS_VIA_T1_SET_TIME) : sta SYS_VIA_R4_T1C_L
+    lda #HI(SYS_VIA_T1_SET_TIME) : sta SYS_VIA_R5_T1C_H
     lda #LO(H_Refresh * 8 - 2) : sta SYS_VIA_R6_T1L_L
     lda #HI(H_Refresh * 8 - 2) : sta SYS_VIA_R7_T1L_H
 
