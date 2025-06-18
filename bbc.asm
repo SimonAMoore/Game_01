@@ -104,7 +104,7 @@ COL_WHITE   = 7
 ;===============================================================================
 
 Line      = 0                                           ; Character line for T1 to trigger just before
-Adjust    = 8                                           ; Adjustment for timer to trigger just before horizontal blanking
+Adjust    = 9                                           ; Adjustment for timer to trigger just before horizontal blanking
 H_Refresh = 64                                          ; Horizontal refresh period in microseconds
 V_Refresh = 20000 - 32                                  ; Vertical refresh period in microseconds (-32us half scanline for non-interlaced mode)
 Scanline  = (8 + Line) * 8 - 3                          ; Calculate scanline to trigger timer on (-3 VSync occurs on 2nd scanline of character line)
