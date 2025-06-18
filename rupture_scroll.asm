@@ -53,7 +53,7 @@
     ldx #&00
     stx TEMP_1
         
-.loop
+.loop_2
     ldx #&00
     {
     .wait_vsync
@@ -66,7 +66,7 @@
     stx TEMP_1
     bcc skip
     dey
-    bne loop
+    bne loop_2
 .skip
 
     ; Set T1 Timer. Start just before end of last line
@@ -101,6 +101,9 @@
 ; 6845 CRTC Rupture settings for region R0
 .rupture_R0
 {
+    ; Increase rupture counter
+    inc RUPTURE_COUNTER
+
     ; Get rupture counter
     ldx RUPTURE_COUNTER
 
@@ -121,9 +124,6 @@
     ; Set number of visible character lines
     lda #&06 : sta CRTC_REG
     lda #&01 : sta CRTC_DATA
-
-    ; Increase rupture counter
-    inc RUPTURE_COUNTER
 
 .exit
     rts
