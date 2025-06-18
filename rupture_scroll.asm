@@ -1,6 +1,25 @@
 ; Initialise 6845 registers for vertical rupture
 .rupture_init
 {
+    ; Initialise screen address table for R12 & R13 for each line 0-23
+    ldy #23
+.loop_1
+    clc
+    ldx #&00
+    stx TEMP_X
+    lda background_y_addr_offset, y
+    ror a
+    ror TEMP_X
+    ror a
+    ror TEMP_X
+    ror a
+    ror TEMP_X
+    sta RUPTURE_ADDR_TABLE, y
+    ldx TEMP_X
+    stx RUPTURE_OFFSET_TABLE, y
+    dey
+    bpl loop_1
+
     ; Disable all interrupts and events 
     sei
     lda #&7f                ; 01111111b
@@ -8,7 +27,7 @@
     sta SYS_VIA_R14_IER
 
     ; Enable VSync and System Timer 1
-    lda #&C2                ; 11000010b
+    lda #&c2                ; 11000010b
     sta SYS_VIA_R14_IER
 
     ; Synchronize to exact VSync and initialise Timer 1
@@ -83,17 +102,20 @@
 .rupture_R0
 {
     ; Set screen start address for next region
-    ;lda #&0c : sta CRTC_REG
-    ;lda #SCR_HI : sta CRTC_DATA
-
-    clc
-    lda RUPTURE_COUNTER     ; load rupture counter
-    adc FRAME_COUNTER       ; add frame counter
-    tax                     ; transfer to x index
-    lda sine_table, x       ; load offset from sine table
-    tax
     lda #&0d : sta CRTC_REG
-    txa : sta CRTC_DATA
+    clc
+    lda RUPTURE_COUNTER
+    tax
+    adc FRAME_COUNTER
+    tay
+    lda sine_table, y
+    adc RUPTURE_OFFSET_TABLE, x
+
+    sta CRTC_DATA
+
+    lda #&0c : sta CRTC_REG
+    lda RUPTURE_ADDR_TABLE, x
+    sta CRTC_DATA
 
     ; Set number of character lines - 1
     ; for current region
@@ -135,14 +157,18 @@
     lda #&00
     sta RUPTURE_COUNTER
 
-    clc
-    lda RUPTURE_COUNTER     ; load rupture counter
-    adc FRAME_COUNTER       ; add frame counter
-    tax                     ; transfer to x index
-    lda &1800, x            ; load offset from sine table
-    tax
-    lda #&0d : sta CRTC_REG
-    txa : sta CRTC_DATA
+    ;clc
+    ;lda RUPTURE_COUNTER     ; load rupture counter
+    ;adc FRAME_COUNTER       ; add frame counter
+    ;tax                     ; transfer to x index
+    ;lda &1800, x            ; load offset from sine table
+    ;tax
+    ;lda #&0d : sta CRTC_REG
+    ;txa : sta CRTC_DATA
+    ;lda #&0c : sta CRTC_REG
+    ;ldx RUPTURE_COUNTER
+    ;lda RUPTURE_ADDR_TABLE, x
+    ;sta CRTC_DATA
 
     ; Increase frame counter
     inc FRAME_COUNTER
