@@ -1,6 +1,14 @@
 ; Initialise 6845 registers for vertical rupture
 .rupture_init
 {
+    ; Reset rupture counter
+    lda #&00
+    sta RUPTURE_COUNTER
+
+    ; Reset frame counter
+    lda #&00
+    sta FRAME_COUNTER
+
     ; Initialise screen address table for R12 & R13 for each line 0-23
     ldy #23
 .loop_1
@@ -14,9 +22,9 @@
     ror TEMP_X
     ror a
     ror TEMP_X
-    sta RUPTURE_ADDR_TABLE, y
+    sta RUPTURE_ADDR_HI_TABLE, y
     ldx TEMP_X
-    stx RUPTURE_OFFSET_TABLE, y
+    stx RUPTURE_ADDR_LO_TABLE, y
     dey
     bpl loop_1
 
@@ -68,14 +76,6 @@
     lda #LO(H_Refresh * 8 - 2) : sta SYS_VIA_R6_T1L_L
     lda #HI(H_Refresh * 8 - 2) : sta SYS_VIA_R7_T1L_H
 
-    ; Reset rupture counter
-    lda #&00
-    sta RUPTURE_COUNTER
-
-    ; Reset frame counter
-    lda #&00
-    sta FRAME_COUNTER
-
     ; Set vsync position
     lda #&07 : sta CRTC_REG
     lda #&08 : sta CRTC_DATA
@@ -101,20 +101,16 @@
 ; 6845 CRTC Rupture settings for region R0
 .rupture_R0
 {
+    ; Get rupture counter
+    ldx RUPTURE_COUNTER
+
     ; Set screen start address for next region
     lda #&0d : sta CRTC_REG
-    clc
-    lda RUPTURE_COUNTER
-    tax
-    adc FRAME_COUNTER
-    tay
-    lda sine_table, y
-    adc RUPTURE_OFFSET_TABLE, x
-
+    lda RUPTURE_ADDR_LO_TABLE, x
     sta CRTC_DATA
 
     lda #&0c : sta CRTC_REG
-    lda RUPTURE_ADDR_TABLE, x
+    lda RUPTURE_ADDR_HI_TABLE, x
     sta CRTC_DATA
 
     ; Set number of character lines - 1
@@ -133,42 +129,19 @@
     rts
 }
 
-; 6845 CRTC Rupture settings for region R1 [Lines 12 - 23]
-; Screen address: &6a00 + scroll offset
-;
-; 12 character lines
-; 96 scanlines
-; 
-; last rupture section - vsync
-; vertical blanking
-; 15 character lines
-; 120 scanlines
-;
+; 6845 CRTC Rupture settings for region R1
 .rupture_R1
 {
     ; Set screen start address for next region
-    ;lda #&0c : sta CRTC_REG
-    ;lda #SCR_HI : sta CRTC_DATA
+    lda #&0d : sta CRTC_REG
+    lda #SCR_LO : sta CRTC_DATA
 
-    ;lda #&0d : sta CRTC_REG
-    ;lda #SCR_LO : sta CRTC_DATA
+    lda #&0c : sta CRTC_REG
+    lda #SCR_HI : sta CRTC_DATA
 
     ; Reset rupture counter
     lda #&00
     sta RUPTURE_COUNTER
-
-    ;clc
-    ;lda RUPTURE_COUNTER     ; load rupture counter
-    ;adc FRAME_COUNTER       ; add frame counter
-    ;tax                     ; transfer to x index
-    ;lda &1800, x            ; load offset from sine table
-    ;tax
-    ;lda #&0d : sta CRTC_REG
-    ;txa : sta CRTC_DATA
-    ;lda #&0c : sta CRTC_REG
-    ;ldx RUPTURE_COUNTER
-    ;lda RUPTURE_ADDR_TABLE, x
-    ;sta CRTC_DATA
 
     ; Increase frame counter
     inc FRAME_COUNTER
@@ -180,11 +153,3 @@
 .exit
     rts
 }
-
-; Total Timing Values:
-;
-;                       R0      R1    VBlank      Total
-; -------------------------------------------------------
-;   Character lines:    12      12      15          39
-;         Scanlines:    96      96     120         312
-; -------------------------------------------------------
