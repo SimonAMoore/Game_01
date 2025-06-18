@@ -124,6 +124,42 @@
     sta SCREEN_ADDR + &2d00,y
     sta SCREEN_ADDR + &2e00,y
     sta SCREEN_ADDR + &2f00,y 
+    sta SCREEN_ADDR + &3000,y 
+    sta SCREEN_ADDR + &3100,y 
+    sta SCREEN_ADDR + &3200,y 
+    sta SCREEN_ADDR + &3300,y 
+    sta SCREEN_ADDR + &3400,y 
+    sta SCREEN_ADDR + &3500,y 
+    sta SCREEN_ADDR + &3600,y 
+    sta SCREEN_ADDR + &3700,y 
+    sta SCREEN_ADDR + &3800,y 
+    sta SCREEN_ADDR + &3900,y 
+    sta SCREEN_ADDR + &3a00,y 
+    sta SCREEN_ADDR + &3b00,y 
+    sta SCREEN_ADDR + &3c00,y 
+    sta SCREEN_ADDR + &3d00,y 
+    sta SCREEN_ADDR + &3e00,y 
+    sta SCREEN_ADDR + &3f00,y 
+    sta SCREEN_ADDR + &4000,y 
+    sta SCREEN_ADDR + &4100,y 
+    sta SCREEN_ADDR + &4200,y 
+    sta SCREEN_ADDR + &4300,y 
+    sta SCREEN_ADDR + &4400,y 
+    sta SCREEN_ADDR + &4500,y 
+    sta SCREEN_ADDR + &4600,y 
+    sta SCREEN_ADDR + &4700,y 
+    sta SCREEN_ADDR + &4800,y 
+    sta SCREEN_ADDR + &4900,y 
+    sta SCREEN_ADDR + &4a00,y 
+    sta SCREEN_ADDR + &4b00,y 
+    sta SCREEN_ADDR + &4c00,y 
+    sta SCREEN_ADDR + &4d00,y 
+    sta SCREEN_ADDR + &4e00,y 
+    sta SCREEN_ADDR + &4f00,y 
+    sta SCREEN_ADDR + &5000,y 
+    sta SCREEN_ADDR + &5100,y 
+    sta SCREEN_ADDR + &5200,y 
+    sta SCREEN_ADDR + &5300,y 
     iny
     beq exit
     jmp loop
