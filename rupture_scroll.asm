@@ -109,9 +109,22 @@
 
     ; Set screen start address for next region
     lda #&0d : sta CRTC_REG
+
+    ; Check scroll flag
+    lda background_scroll_table, x
+    bne skip_1
     lda RUPTURE_ADDR_LO_TABLE, x
     sta CRTC_DATA
+    jmp skip_2
 
+.skip_1 
+    clc
+    lda FRAME_COUNTER
+    and #&3f
+    sbc RUPTURE_ADDR_LO_TABLE, x
+    sta CRTC_DATA
+
+.skip_2
     lda #&0c : sta CRTC_REG
     lda RUPTURE_ADDR_HI_TABLE, x
     sta CRTC_DATA
