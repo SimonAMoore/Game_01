@@ -326,7 +326,7 @@
 {
     lda #&27
     ldx #&09
-    ldy #&0a
+    ldy #&10
     sta TEMP_2
 .loop_1
     stx TEMP_3
@@ -343,6 +343,8 @@
     dex
     bpl loop_1
     ldx #&09
+    dey
+    dey
     dey
     dey
     bpl loop_1
