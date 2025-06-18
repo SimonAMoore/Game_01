@@ -102,8 +102,8 @@
 
 .draw_car_a
 {
-    lda #&68 : sta TEMP_ADDR_1_HI
-    lda #&00 : sta TEMP_ADDR_1_LO
+    lda #&69 : sta TEMP_ADDR_1_HI
+    lda #&e0 : sta TEMP_ADDR_1_LO
     jsr test_sprites_16
     rts
 }
