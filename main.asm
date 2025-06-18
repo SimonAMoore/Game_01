@@ -2,6 +2,7 @@ include "bbc.asm"
 include "zero_page.asm"
 
 ORG     &1800
+GUARD   SCREEN_ADDR
 
 .start
 
@@ -15,9 +16,6 @@ ORG     &1800
     .end
     TABLE_ALIGNED "sine_table"
 }
-
-ORG     &1900
-GUARD   SCREEN_ADDR
 
 include "charset.asm"
 include "sprites.asm"
