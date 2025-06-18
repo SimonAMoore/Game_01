@@ -2,8 +2,13 @@
 ORG     &00
 GUARD   &ff
 
-.RUPTURE_COUNTER    skip 1
-.FRAME_COUNTER      skip 1
+; Rupture and frame counter
+.RUPTURE_COUNTER skip 1
+.FRAME_COUNTER   skip 1
+
+; Rupture start address for each line
+.RUPTURE_ADDR_HI_TABLE skip 24
+.RUPTURE_ADDR_LO_TABLE skip 24
 
 ; Register temporary storage
 .TEMP_A skip 1
@@ -37,7 +42,3 @@ TEMP_3 = TEMP_3_LO
 TEMP_ADDR_1 = TEMP_ADDR_1_LO
 TEMP_ADDR_2 = TEMP_ADDR_2_LO
 TEMP_ADDR_3 = TEMP_ADDR_3_LO
-
-; Rupture start address for each line
-.RUPTURE_ADDR_TABLE     skip 24
-.RUPTURE_OFFSET_TABLE   skip 24
