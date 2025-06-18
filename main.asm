@@ -32,14 +32,12 @@ include "background.asm"
     jsr init_text_mode
     jsr instructions
     jsr clear_screen
-    ;jsr test_screen
     jsr init_graphics_mode
     jsr test_chars
     jsr test_sprites
     jsr draw_car_a
     jsr background_draw_home
     jsr background_draw_grass
-    ;jsr init_scanline_timer
     jsr init_keyboard
     jsr rupture_init
 
@@ -50,7 +48,7 @@ include "background.asm"
     ; has the vertical blanking and vsync
 
 .screen_loop
-    ; Wait for Scanline_Timer Even # Lines
+    ; Wait for Scanline_Timer
     {
         lda #&40
     .wait
@@ -59,21 +57,8 @@ include "background.asm"
         sta SYS_VIA_R13_IFR
     }
 
-    ULA_SET_PALETTE 0, COL_BLUE
-    ULA_SET_PALETTE 3, COL_WHITE
-
-    ; Set rupture screen 0
-    jsr rupture_R0
-
-    ; Wait for Scanline_Timer Odd # Lines
-    {
-        lda #&40
-    .wait
-        bit SYS_VIA_R13_IFR
-        beq wait
-        sta SYS_VIA_R13_IFR
-    }
-
+    ; Palette change required to ensure 6845 R12 and R13
+    ; get set inside the correct rupture screen
     ULA_SET_PALETTE 0, COL_BLUE
     ULA_SET_PALETTE 3, COL_WHITE
 
