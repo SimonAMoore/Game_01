@@ -9,7 +9,8 @@ ORG     &1800
 {
     .start
     FOR n, 0, 255
-      equb INT((SIN(n * 8 * PI / 256) + 1) * 32.25)
+      equb INT(0.5 * (SIN((n + 192) * 2 * PI / 256) + 1) * 64)
+      ;print "Sine table: ", n, " / 256 = ", INT(0.5 * (SIN((n + 192) * 2 * PI / 256) + 1) * 64 )
     NEXT
     .end
     TABLE_ALIGNED "sine_table"
@@ -38,12 +39,9 @@ include "background.asm"
     ;jsr draw_car_a
     jsr background_draw_home
     jsr background_draw_grass
-    ;jsr init_scanline_timer
+    jsr init_scanline_timer
     ;jsr init_keyboard
-    ;jsr rupture_init
-
-.brk
-    jmp brk
+    jsr rupture_init
 
     ; Main loop
 .main_loop
@@ -136,6 +134,8 @@ print "                  .background_draw_grass: ", ~background_draw_grass
 print "                    .init_scanline_timer: ", ~init_scanline_timer
 print "                          .init_keyboard: ", ~init_keyboard
 print "                           .rupture_init: ", ~rupture_init
+print "                             .rupture_R0: ", ~rupture_R0
+print "                             .rupture_R1: ", ~rupture_R1
 print "================================================"
 print "      T1 Timer Setup Time:   ", LEFT$("$0000", 5 - LEN(STR$~(SYS_VIA_T1_SET_TIME))), STR$~(SYS_VIA_T1_SET_TIME), " microseconds ( ", SYS_VIA_T1_SET_TIME, ")"
 print "      T1 Timer Latch Time:   ", LEFT$("$0000", 5 - LEN(STR$~(SYS_VIA_T1_LATCH_TIME))), STR$~(SYS_VIA_T1_LATCH_TIME), " microseconds ( ", SYS_VIA_T1_LATCH_TIME, ")"
