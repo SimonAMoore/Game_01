@@ -123,7 +123,6 @@
 .exit
     rts
 }
-print ~background_draw_home
 
 .background_draw_grass
 {
