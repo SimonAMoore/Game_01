@@ -37,3 +37,7 @@ TEMP_3 = TEMP_3_LO
 TEMP_ADDR_1 = TEMP_ADDR_1_LO
 TEMP_ADDR_2 = TEMP_ADDR_2_LO
 TEMP_ADDR_3 = TEMP_ADDR_3_LO
+
+; Rupture start address for each line
+.RUPTURE_ADDR_TABLE     skip 24
+.RUPTURE_OFFSET_TABLE   skip 24
