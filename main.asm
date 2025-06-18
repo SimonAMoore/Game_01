@@ -29,18 +29,18 @@ include "background.asm"
     lda #&0f : ldx #&00 : jsr OSBYTE
 
     ; Initialise
-    ;jsr init_text_mode
-    ;jsr instructions
-    ;jsr clear_screen
+    jsr init_text_mode
+    jsr instructions
+    jsr clear_screen
     ;jsr test_screen
     jsr init_graphics_mode
-    ;jsr test_chars
-    ;jsr test_sprites
-    ;jsr draw_car_a
+    jsr test_chars
+    jsr test_sprites
+    jsr draw_car_a
     jsr background_draw_home
     jsr background_draw_grass
-    jsr init_scanline_timer
-    ;jsr init_keyboard
+    ;jsr init_scanline_timer
+    jsr init_keyboard
     jsr rupture_init
 
     ; Main loop
@@ -59,8 +59,8 @@ include "background.asm"
         sta SYS_VIA_R13_IFR
     }
 
-    ULA_SET_PALETTE 0, COL_RED
-    ULA_SET_PALETTE 3, COL_YELLOW
+    ULA_SET_PALETTE 0, COL_BLUE
+    ULA_SET_PALETTE 3, COL_WHITE
 
     ; Set rupture screen 0
     jsr rupture_R0
@@ -74,7 +74,7 @@ include "background.asm"
         sta SYS_VIA_R13_IFR
     }
 
-    ULA_SET_PALETTE 0, COL_BLACK
+    ULA_SET_PALETTE 0, COL_BLUE
     ULA_SET_PALETTE 3, COL_WHITE
 
     ; Set rupture screen 0
