@@ -103,6 +103,7 @@ include "graphics.asm"
 include "rupture_scroll.asm"
 include "interrupts.asm"
 include "keyboard.asm"
+include "sound.asm"
 
 .end:
 
@@ -125,6 +126,7 @@ print "                          .init_keyboard: ", ~init_keyboard
 print "                           .rupture_init: ", ~rupture_init
 print "                             .rupture_R0: ", ~rupture_R0
 print "                             .rupture_R1: ", ~rupture_R1
+print "                             .sound_test: ", ~sound_test
 print "================================================"
 print "      T1 Timer Setup Time:   ", LEFT$("$0000", 5 - LEN(STR$~(SYS_VIA_T1_SET_TIME))), STR$~(SYS_VIA_T1_SET_TIME), " microseconds ( ", SYS_VIA_T1_SET_TIME, ")"
 print "      T1 Timer Latch Time:   ", LEFT$("$0000", 5 - LEN(STR$~(SYS_VIA_T1_LATCH_TIME))), STR$~(SYS_VIA_T1_LATCH_TIME), " microseconds ( ", SYS_VIA_T1_LATCH_TIME, ")"
