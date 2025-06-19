@@ -107,7 +107,7 @@
 .background_scroll_table
 {
     .start
-    equb &00, &00, &00, &00, &01, &01, &01, &01, &01, &01, &01, &01
+    equb &00, &00, &00, &00, &01, &00, &01, &00, &01, &00, &01, &00
     equb &00, &00, &00, &00, &01, &01, &00, &00, &00, &00, &00, &00
     .end
     TABLE_ALIGNED "background_scroll_table"
