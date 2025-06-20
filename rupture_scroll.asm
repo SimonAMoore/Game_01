@@ -73,8 +73,8 @@
     ; Repeat every 8 scanlines
     lda #LO(SYS_VIA_T1_SET_TIME) : sta SYS_VIA_R4_T1C_L
     lda #HI(SYS_VIA_T1_SET_TIME) : sta SYS_VIA_R5_T1C_H
-    lda #LO(H_Refresh * 8 - 2) : sta SYS_VIA_R6_T1L_L
-    lda #HI(H_Refresh * 8 - 2) : sta SYS_VIA_R7_T1L_H
+    lda #LO(SYS_VIA_T1_LATCH_TIME) : sta SYS_VIA_R6_T1L_L
+    lda #HI(SYS_VIA_T1_LATCH_TIME) : sta SYS_VIA_R7_T1L_H
 
     ; Set vsync position
     lda #&07 : sta CRTC_REG
