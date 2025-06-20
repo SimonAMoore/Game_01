@@ -105,20 +105,19 @@
     inc RUPTURE_COUNTER
 
     ; Get rupture counter
-    lda RUPTURE_COUNTER
+    ldx RUPTURE_COUNTER
 
-    ; Set palette for current character line
-    tax
-    sec
-    sbc #&01
-    beq skip_0_COL_BLUE
-    cmp #&0d
-    bcs skip_0_COL_BLUE
-    ULA_SET_PALETTE 0, COL_BLUE
-    bcc skip_0_COL_BLACK
-.skip_0_COL_BLUE
-    ULA_SET_PALETTE 0, COL_BLACK
-.skip_0_COL_BLACK
+    ; Get actual colour for logical colour 0
+    txa                                         ; Transfer rupture counter into Accumulator
+    asl a : asl a:                              ; Multiply Accumulator by 4 to get table offset
+    tay                                         ; Transfer Accumulator into index register Y
+    lda background_palette_table - 4, y         ; Get actual colour for logical colour &00
+
+    ; Program ULA with actual colour for logical colour 0
+    sta VIDEO_ULA_PALETTE_REG
+    eor #&10 : sta VIDEO_ULA_PALETTE_REG
+    eor #&50 : sta VIDEO_ULA_PALETTE_REG
+    eor #&10 : sta VIDEO_ULA_PALETTE_REG
 
     ; Set screen start address for next region
     lda #&0d : sta CRTC_REG
