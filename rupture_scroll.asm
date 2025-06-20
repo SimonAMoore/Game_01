@@ -107,11 +107,13 @@
     ; Get rupture counter
     ldx RUPTURE_COUNTER
 
-    ; Get actual colour for logical colour 0
+    ; Calculate offset into palette data table
     txa                                         ; Transfer rupture counter into Accumulator
     asl a : asl a:                              ; Multiply Accumulator by 4 to get table offset
     tay                                         ; Transfer Accumulator into index register Y
-    lda background_palette_table - 4, y         ; Get actual colour for logical colour &00
+
+    ; Get actual colour for logical colour 0
+    lda background_palette_table - 4, y
 
     ; Program ULA with actual colour for logical colour 0
     sta VIDEO_ULA_PALETTE_REG
