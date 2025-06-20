@@ -118,9 +118,9 @@ DISPLAY_REFRESH = 1000000 / V_Refresh                   ; Calculate display refr
 
 MACRO TABLE_ALIGNED str
     IF HI(start) <> HI(end-1)
-        PRINT "Table '", str, "' [ ", ~start, ": ", ~(end - 1), "] crosses page boundary ******"
+        PRINT "Table '", str, "' [ ", ~start, ": ", ~(end - 1), "( ", ~(end-start), ") ] crosses page boundary ******"
     ELSE
-        PRINT "Table '", str, "' [ ", ~start, ": ", ~(end - 1), "] aligned within page boundary"
+        PRINT "Table '", str, "' [ ", ~start, ": ", ~(end - 1), "( ", ~(end-start), ") ] aligned within page boundary"
     ENDIF
 ENDMACRO
 

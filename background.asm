@@ -112,6 +112,38 @@
     .end
     TABLE_ALIGNED "background_scroll_table"
 }
+
+.background_palette_table
+{
+    .start
+    equb COL_BLACK, COL_GREEN,  COL_YELLOW, COL_WHITE
+    equb COL_BLUE,  COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLUE,  COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLUE,  COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLUE,  COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLUE,  COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLUE,  COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLUE,  COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLUE,  COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLUE,  COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLUE,  COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLUE,  COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLACK, COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLACK, COL_GREEN,  COL_MAGENTA,COL_CYAN
+    equb COL_BLACK, COL_GREEN,  COL_MAGENTA,COL_CYAN
+    equb COL_BLACK, COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLACK, COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLACK, COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLACK, COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLACK, COL_GREEN,  COL_MAGENTA,COL_CYAN
+    equb COL_BLACK, COL_GREEN,  COL_MAGENTA,COL_CYAN
+    equb COL_BLACK, COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLACK, COL_GREEN,  COL_RED,    COL_WHITE
+    equb COL_BLACK, COL_GREEN,  COL_YELLOW, COL_WHITE
+    .end
+    TABLE_ALIGNED "background_palette_table"
+}
+
 .background_draw_home
 {
     ; Store screen address of line &01 in TEMP_ADDR_3

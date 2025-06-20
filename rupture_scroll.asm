@@ -105,7 +105,20 @@
     inc RUPTURE_COUNTER
 
     ; Get rupture counter
-    ldx RUPTURE_COUNTER
+    lda RUPTURE_COUNTER
+
+    ; Set palette for current character line
+    tax
+    sec
+    sbc #&01
+    beq skip_0_COL_BLUE
+    cmp #&0d
+    bcs skip_0_COL_BLUE
+    ULA_SET_PALETTE 0, COL_BLUE
+    bcc skip_0_COL_BLACK
+.skip_0_COL_BLUE
+    ULA_SET_PALETTE 0, COL_BLACK
+.skip_0_COL_BLACK
 
     ; Set screen start address for next region
     lda #&0d : sta CRTC_REG
@@ -118,11 +131,8 @@
     jmp skip_scroll
 .skip_no_scroll
 
-    clc
-    txa
-    adc FRAME_COUNTER
-    tay
-    lda sine_table, y
+    lda FRAME_COUNTER
+    and #&3f
     adc RUPTURE_ADDR_LO_TABLE, x
     sta CRTC_DATA
 .skip_scroll

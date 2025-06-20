@@ -6,20 +6,15 @@ GUARD   SCREEN_ADDR
 
 .start
 
-.sine_table
-{
-    .start
-    FOR n, 0, 255
-      equb INT(0.5 * (SIN((n + 192) * 2 * PI / 256) + 1) * 64)
-      ;print "Sine table: ", n, " / 256 = ", INT(0.5 * (SIN((n + 192) * 2 * PI / 256) + 1) * 64 )
-    NEXT
-    .end
-    TABLE_ALIGNED "sine_table"
-}
-
 include "charset.asm"
 include "sprites.asm"
 include "background.asm"
+include "instructions.asm"
+include "graphics.asm"
+include "rupture_scroll.asm"
+include "keyboard.asm"
+include "sound.asm"
+
 
 .main_entry:
 {
@@ -57,8 +52,8 @@ include "background.asm"
 
     ; Palette change required to ensure 6845 R12 and R13
     ; get set inside the correct rupture screen
-    ULA_SET_PALETTE 0, COL_BLUE
-    ULA_SET_PALETTE 3, COL_WHITE
+    ; ULA_SET_PALETTE 0, COL_BLUE
+    ; ULA_SET_PALETTE 3, COL_WHITE
 
     ; Set rupture screen 0
     jsr rupture_R0
@@ -69,7 +64,7 @@ include "background.asm"
     cmp #24
     bne screen_loop
 
-    ; Set rupture screen 0
+    ; Set rupture screen 1 with VBlank and VSync
     jsr rupture_R1
 
     ; Wait for VSYNC
@@ -98,20 +93,12 @@ include "background.asm"
     rts
 }
 
-include "instructions.asm"
-include "graphics.asm"
-include "rupture_scroll.asm"
-;include "interrupts.asm"
-include "keyboard.asm"
-include "sound.asm"
-
 .end:
 
 SAVE "main", start, end, main_entry
 print "================================================"
 print " Start: ", ~start, "    End: ", ~end, "    Execute: ", ~main_entry
 print "================================================"
-print "                             .sine_table: ", ~sine_table
 print "                         .init_text_mode: ", ~init_text_mode
 print "                           .instructions: ", ~instructions
 print "                           .clear_screen: ", ~clear_screen
@@ -121,7 +108,6 @@ print "                           .test_sprites: ", ~test_sprites
 print "                             .draw_car_a: ", ~draw_car_a
 print "                   .background_draw_home: ", ~background_draw_home
 print "                  .background_draw_grass: ", ~background_draw_grass
-;print "                    .init_scanline_timer: ", ~init_scanline_timer
 print "                          .init_keyboard: ", ~init_keyboard
 print "                           .rupture_init: ", ~rupture_init
 print "                             .rupture_R0: ", ~rupture_R0
