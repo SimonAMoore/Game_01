@@ -84,8 +84,8 @@ include "background.asm"
     ; Latch T1 timer for every character line
     lda #LO(SYS_VIA_T1_SET_TIME) : sta SYS_VIA_R4_T1C_L
     lda #HI(SYS_VIA_T1_SET_TIME) : sta SYS_VIA_R5_T1C_H
-    lda #LO(H_Refresh * 8 - 2) : sta SYS_VIA_R6_T1L_L
-    lda #HI(H_Refresh * 8 - 2) : sta SYS_VIA_R7_T1L_H
+    lda #LO(SYS_VIA_T1_LATCH_TIME) : sta SYS_VIA_R6_T1L_L
+    lda #HI(SYS_VIA_T1_LATCH_TIME) : sta SYS_VIA_R7_T1L_H
 
 .vertical_blanking
     ;jsr read_keys
@@ -101,7 +101,7 @@ include "background.asm"
 include "instructions.asm"
 include "graphics.asm"
 include "rupture_scroll.asm"
-include "interrupts.asm"
+;include "interrupts.asm"
 include "keyboard.asm"
 include "sound.asm"
 
@@ -121,7 +121,7 @@ print "                           .test_sprites: ", ~test_sprites
 print "                             .draw_car_a: ", ~draw_car_a
 print "                   .background_draw_home: ", ~background_draw_home
 print "                  .background_draw_grass: ", ~background_draw_grass
-print "                    .init_scanline_timer: ", ~init_scanline_timer
+;print "                    .init_scanline_timer: ", ~init_scanline_timer
 print "                          .init_keyboard: ", ~init_keyboard
 print "                           .rupture_init: ", ~rupture_init
 print "                             .rupture_R0: ", ~rupture_R0
