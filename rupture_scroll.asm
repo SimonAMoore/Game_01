@@ -119,6 +119,24 @@
     eor #&50 : sta VIDEO_ULA_PALETTE_REG
     eor #&10 : sta VIDEO_ULA_PALETTE_REG
 
+    ; Get actual colour for logical colour 2
+    lda background_palette_table - 2, y
+
+    ; Program ULA with actual colour for logical colour 2
+    sta VIDEO_ULA_PALETTE_REG
+    eor #&10 : sta VIDEO_ULA_PALETTE_REG
+    eor #&50 : sta VIDEO_ULA_PALETTE_REG
+    eor #&10 : sta VIDEO_ULA_PALETTE_REG
+
+    ; Get actual colour for logical colour 3
+    lda background_palette_table - 1, y
+
+    ; Program ULA with actual colour for logical colour 3
+    sta VIDEO_ULA_PALETTE_REG
+    eor #&10 : sta VIDEO_ULA_PALETTE_REG
+    eor #&50 : sta VIDEO_ULA_PALETTE_REG
+    eor #&10 : sta VIDEO_ULA_PALETTE_REG
+
     ; Set screen start address for next region
     lda #&0d : sta CRTC_REG
 
