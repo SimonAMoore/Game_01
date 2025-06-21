@@ -1,4 +1,4 @@
-.init_keyboard
+.keyboard_init
 {
     lda #&7F : sta SYS_VIA_R3_DDRA          ; Set SYS_VIA_PORT_A Bit 7 as input, bits 0-6 as outputs
     lda #&0F : sta SYS_VIA_R2_DDRB          ; Enable addressable latch
