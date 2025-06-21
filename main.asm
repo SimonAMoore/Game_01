@@ -32,6 +32,7 @@ include "sound.asm"
     jsr background_draw_home
     jsr background_draw_grass
     jsr init_keyboard
+    jsr sound_init
     jsr rupture_init
 
     ; Main loop
