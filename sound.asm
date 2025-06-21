@@ -1,4 +1,4 @@
-.sound_test
+.sound_init
 {
     ldy #&ff : sty SYS_VIA_R3_DDRA      ; Set PORTA bits 0-7 as outputs
     sta SYS_VIA_R15_ORA_IRA             ; Ouput A on SYS VIA PORT A
