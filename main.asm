@@ -31,10 +31,10 @@ include "sound.asm"
     jsr draw_car_a
     jsr background_draw_home
     jsr background_draw_grass
-    jsr init_keyboard
+    jsr keyboard_init
     jsr sound_init
     jsr rupture_init
-
+    
     ; Main loop
 .main_loop
     ; Loop through rupture sections 0-23
