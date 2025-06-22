@@ -28,11 +28,11 @@ include "sound.asm"
     jsr init_graphics_mode
     jsr test_chars
     jsr test_sprites
-    jsr draw_car_a
+    jsr draw_log
     jsr background_draw_home
     jsr background_draw_grass
     jsr keyboard_init
-    jsr sound_init
+    ;jsr sound_init
     jsr rupture_init
     
     ; Main loop
@@ -106,14 +106,14 @@ print "                           .clear_screen: ", ~clear_screen
 print "                     .init_graphics_mode: ", ~init_graphics_mode
 print "                             .test_chars: ", ~test_chars
 print "                           .test_sprites: ", ~test_sprites
-print "                             .draw_car_a: ", ~draw_car_a
+print "                               .draw_log: ", ~draw_log
 print "                   .background_draw_home: ", ~background_draw_home
 print "                  .background_draw_grass: ", ~background_draw_grass
-print "                          .init_keyboard: ", ~init_keyboard
+print "                          .keyboard_init: ", ~keyboard_init
 print "                           .rupture_init: ", ~rupture_init
 print "                             .rupture_R0: ", ~rupture_R0
 print "                             .rupture_R1: ", ~rupture_R1
-print "                             .sound_test: ", ~sound_test
+print "                             .sound_init: ", ~sound_init
 print "================================================"
 print "      T1 Timer Setup Time:   ", LEFT$("$0000", 5 - LEN(STR$~(SYS_VIA_T1_SET_TIME))), STR$~(SYS_VIA_T1_SET_TIME), " microseconds ( ", SYS_VIA_T1_SET_TIME, ")"
 print "      T1 Timer Latch Time:   ", LEFT$("$0000", 5 - LEN(STR$~(SYS_VIA_T1_LATCH_TIME))), STR$~(SYS_VIA_T1_LATCH_TIME), " microseconds ( ", SYS_VIA_T1_LATCH_TIME, ")"
